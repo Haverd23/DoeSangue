@@ -1,8 +1,10 @@
-﻿namespace DOS.Auth.Domain.Models
+﻿using DOS.Core.DomainObjects;
+using System.Diagnostics;
+
+namespace DOS.Auth.Domain.Models
 {
-    public class User
+    public class User : Entity, IAggregateRoot
     {
-        public Guid UsuarioId { get; private set; }
         public Email Email { get; private set; }
         public string Senha { get; private set; }
         public string Role { get; private set; }
@@ -10,7 +12,6 @@
         public User(Email email, string senha, string role)
         {
             SenhaValida(senha);
-            UsuarioId = Guid.NewGuid();
             Email = email;
             Senha = senha;
             Role = role;
