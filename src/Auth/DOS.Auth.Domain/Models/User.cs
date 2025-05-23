@@ -8,12 +8,12 @@ namespace DOS.Auth.Domain.Models
         public string Senha { get; private set; }
         public string Role { get; private set; }
 
-        public User(Email email, string senha, string role)
+        public User(Email email, string senha)
         {
             SenhaValida(senha);
             Email = email;
             Senha = senha;
-            Role = role;
+            Role = "User;";
             AddDomainEvent(new UserCriadoEvento(Id, Email));
         }
         public void AlterarSenha(string novaSenha)
@@ -31,7 +31,7 @@ namespace DOS.Auth.Domain.Models
             Email = novoEmail;
             AddDomainEvent(new EmailAlteradoEvento(Id, Email));
         }
-        public void SenhaValida(string senha)
+        public static void SenhaValida(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
                 throw new ArgumentException("Senha inválida");

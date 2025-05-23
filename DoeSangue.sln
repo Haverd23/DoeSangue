@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34837296-42F5-4897-A459-52A4DE4356DF}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5E44C912-4BAE-4842-81DC-04D1187065AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Core", "src\Core\DOS.Core\DOS.Core.csproj", "{056852C1-C02C-46D6-AD9F-1703C42BE6A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Auth.Application", "src\Auth\DOS.Auth.Application\DOS.Auth.Application.csproj", "{1B6D5C65-E541-48FD-8E1D-D4D3103C689A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Tests.Application", "tests\AuthTests\Auth.Tests.Application\Auth.Tests.Application.csproj", "{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{056852C1-C02C-46D6-AD9F-1703C42BE6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{056852C1-C02C-46D6-AD9F-1703C42BE6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{056852C1-C02C-46D6-AD9F-1703C42BE6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B6D5C65-E541-48FD-8E1D-D4D3103C689A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B6D5C65-E541-48FD-8E1D-D4D3103C689A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B6D5C65-E541-48FD-8E1D-D4D3103C689A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B6D5C65-E541-48FD-8E1D-D4D3103C689A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +67,7 @@ Global
 		{85858637-B7C0-402C-BB06-871C6F15695E} = {A90B7DBE-0F31-40AD-8D0E-4715631366B2}
 		{5E44C912-4BAE-4842-81DC-04D1187065AE} = {34837296-42F5-4897-A459-52A4DE4356DF}
 		{056852C1-C02C-46D6-AD9F-1703C42BE6A2} = {5E44C912-4BAE-4842-81DC-04D1187065AE}
+		{1B6D5C65-E541-48FD-8E1D-D4D3103C689A} = {A90B7DBE-0F31-40AD-8D0E-4715631366B2}
+		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113} = {C42645C9-5A8E-42A3-8819-646381AFC367}
 	EndGlobalSection
 EndGlobal
