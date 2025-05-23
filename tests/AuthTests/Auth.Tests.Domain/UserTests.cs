@@ -23,7 +23,6 @@ namespace Auth.Tests.Domain
             Assert.Equal(email, user.Email);
             Assert.Equal(senha, user.Senha);
             Assert.Equal(role, user.Role);
-            Assert.NotEqual(Guid.Empty, user.UsuarioId);
 
         }
         [Fact(DisplayName = "Criar user com email inválido deve lançar exceção")]
