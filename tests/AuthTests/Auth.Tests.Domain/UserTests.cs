@@ -13,16 +13,14 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = new Email("teste123@gmail.com");
             var senha = "Teste123@";
-            var role = "Admin";
 
             // Act
-            var user = new User(email, senha, role);
+            var user = new User(email, senha);
 
             // Assert
             Assert.NotNull(user);
             Assert.Equal(email, user.Email);
             Assert.Equal(senha, user.Senha);
-            Assert.Equal(role, user.Role);
 
         }
         [Fact(DisplayName = "Criar user com email inválido deve lançar exceção")]
@@ -30,10 +28,8 @@ namespace Auth.Tests.Domain
         {
             // Arrange
             var senha = "12345";
-            var role = "Admin";
-
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => new User(new Email("1"), senha, role));
+            Assert.Throws<ArgumentException>(() => new User(new Email("1"), senha));
         }
         [Fact(DisplayName = "Criar user com senha vazia deve lançar exceção")]
         public void Construtor_QuandoSenhaVazia_DeveLancarExcecao()
@@ -41,10 +37,9 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = new Email("teste123@gmail.com");
             var senha = "";
-            var role = "Admin";
 
             // Act
-            var ex = Assert.Throws<ArgumentException>(() => new User(email, senha, role));
+            var ex = Assert.Throws<ArgumentException>(() => new User(email, senha));
 
             // Assert
             Assert.Equal("Senha inválida", ex.Message);
@@ -55,10 +50,8 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = new Email("teste123@gmail.com");
             var senha = "12345";
-            var role = "Admin";
-
             // Act
-            var ex = Assert.Throws<ArgumentException>(() => new User(email, senha, role));
+            var ex = Assert.Throws<ArgumentException>(() => new User(email, senha));
 
             // Assert
             Assert.Equal("Senha deve ter pelo menos 6 caracteres", ex.Message);
@@ -70,10 +63,9 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = new Email("teste123@gmail.com");
             var senha = "SenhaSemDigito";
-            var role = "Admin";
 
             // Act
-            var ex = Assert.Throws<ArgumentException>(() => new User(email, senha, role));
+            var ex = Assert.Throws<ArgumentException>(() => new User(email, senha));
 
             // Assert
             Assert.Equal("Senha deve conter pelo menos um número", ex.Message);
@@ -84,10 +76,9 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "123456";
-            var role = "Admin";
 
             // Act
-            var ex = Assert.Throws<ArgumentException>(() => new User(new Email(email), senha, role));
+            var ex = Assert.Throws<ArgumentException>(() => new User(new Email(email), senha));
 
             // Assert
             Assert.Equal("Senha deve conter pelo menos uma letra maiúscula", ex.Message);
@@ -99,10 +90,9 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "teste123";
-            var role = "Admin";
 
             // Act
-            var ex = Assert.Throws<ArgumentException>(() => new User(new Email(email), senha, role));
+            var ex = Assert.Throws<ArgumentException>(() => new User(new Email(email), senha));
 
             // Assert
             Assert.Equal("Senha deve conter pelo menos uma letra maiúscula", ex.Message);
@@ -113,10 +103,9 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "TESTE123";
-            var role = "Admin";
 
             // Act
-            var ex = Assert.Throws<ArgumentException>(() => new User(new Email(email), senha, role));
+            var ex = Assert.Throws<ArgumentException>(() => new User(new Email(email), senha));
 
             // Assert
             Assert.Equal("Senha deve conter pelo menos uma letra minúscula", ex.Message);
@@ -127,9 +116,8 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "Teste123@";
-            var role = "Admin";
 
-            var user = new User(new Email(email), senha, role);
+            var user = new User(new Email(email), senha);
             var novaSenha = "NovaSenha123@";
 
             // Act
@@ -144,9 +132,7 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "Teste123@";
-            var role = "Admin";
-
-            var user = new User(new Email(email), senha, role);
+            var user = new User(new Email(email), senha);
             var novaSenha = "";
 
             // Act
@@ -161,9 +147,7 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "Teste123@";
-            var role = "Admin";
-
-            var user = new User(new Email(email), senha, role);
+            var user = new User(new Email(email), senha);
             var novaSenha = "12Dx@";
 
             // Act
@@ -179,9 +163,7 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@hotmail.com";
             var senha = "Teste123@";
-            var role = "Admin";
-
-            var user = new User(new Email(email), senha, role);
+            var user = new User(new Email(email), senha);
             var novoEmail = new Email("teste123@yahoo.com");
 
             // Act
@@ -196,9 +178,7 @@ namespace Auth.Tests.Domain
             // Arrange
             var email = "teste123@gmail.com";
             var senha = "Teste123@";
-            var role = "Admin";
-
-            var user = new User(new Email(email), senha, role);
+            var user = new User(new Email(email), senha);
            
 
             // Act
