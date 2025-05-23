@@ -1,6 +1,5 @@
-﻿using DOS.Core.DomainObjects;
-using System.Diagnostics;
-
+﻿using DOS.Auth.Domain.Events;
+using DOS.Core.DomainObjects;
 namespace DOS.Auth.Domain.Models
 {
     public class User : Entity, IAggregateRoot
@@ -15,20 +14,23 @@ namespace DOS.Auth.Domain.Models
             Email = email;
             Senha = senha;
             Role = role;
+            AddDomainEvent(new UserCriadoEvento(Id, Email));
         }
         public void AlterarSenha(string novaSenha)
         {
             SenhaValida(novaSenha);
+            if(novaSenha == Senha) return;
             Senha = novaSenha;
+            AddDomainEvent(new SenhaAlteradaEvento(Id,Email));
         }
-
         public void AlterarEmail(Email novoEmail)
         {
             if (novoEmail == null)
                 throw new ArgumentException("Email inválido");
+            if (novoEmail.Entrada == Email.Entrada) return;
             Email = novoEmail;
+            AddDomainEvent(new EmailAlteradoEvento(Id, Email));
         }
-
         public void SenhaValida(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
@@ -41,9 +43,6 @@ namespace DOS.Auth.Domain.Models
                 throw new ArgumentException("Senha deve conter pelo menos uma letra maiúscula");
             if (!senha.Any(char.IsLower))
                 throw new ArgumentException("Senha deve conter pelo menos uma letra minúscula");
-
-        }
-        
-
+        }      
     }
 }
