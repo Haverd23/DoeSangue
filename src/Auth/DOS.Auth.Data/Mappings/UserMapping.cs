@@ -12,12 +12,14 @@ namespace DOS.Auth.Data.Mappings
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Email)
-                .IsRequired()
+                .HasConversion(
+                    email => email.Entrada,             
+                    entrada => new Email(entrada))    
                 .HasColumnType("varchar(100)");
 
             builder.Property(u => u.Senha)
                 .IsRequired()
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(600)");
 
             builder.Property(u => u.Role)
                 .IsRequired()
