@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Auth.Application", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Tests.Application", "tests\AuthTests\Auth.Tests.Application\Auth.Tests.Application.csproj", "{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Auth.API", "src\Auth\DOS.Auth.API\DOS.Auth.API.csproj", "{16FDE05F-95A9-4E15-B6ED-9DCCFBCC0BF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FDE05F-95A9-4E15-B6ED-9DCCFBCC0BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FDE05F-95A9-4E15-B6ED-9DCCFBCC0BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FDE05F-95A9-4E15-B6ED-9DCCFBCC0BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FDE05F-95A9-4E15-B6ED-9DCCFBCC0BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +75,6 @@ Global
 		{056852C1-C02C-46D6-AD9F-1703C42BE6A2} = {5E44C912-4BAE-4842-81DC-04D1187065AE}
 		{1B6D5C65-E541-48FD-8E1D-D4D3103C689A} = {A90B7DBE-0F31-40AD-8D0E-4715631366B2}
 		{CE9E2A12-3539-4BEF-BE6D-6D5AD30F5113} = {C42645C9-5A8E-42A3-8819-646381AFC367}
+		{16FDE05F-95A9-4E15-B6ED-9DCCFBCC0BF5} = {A90B7DBE-0F31-40AD-8D0E-4715631366B2}
 	EndGlobalSection
 EndGlobal

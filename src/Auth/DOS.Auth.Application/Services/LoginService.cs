@@ -4,7 +4,7 @@ using DOS.Auth.Domain.Models;
 
 namespace DOS.Auth.Application.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         private readonly ITokenJWT _tokenJWT;
         private readonly ISenhaCriptografia _senhaCriptografia;
