@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DOS.Usuario.Domain;
+using DOS.Usuario.Domain.Enums;
+using DOS.Usuario.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UsuarioEntity = DOS.Usuario.Domain.Usuario;
-using CPFEntity = DOS.Usuario.Domain.ValueObjects.CPF;
-using TelefoneEntity = DOS.Usuario.Domain.ValueObjects.Telefone;
-using TipoSanguineoEnum = DOS.Usuario.Domain.Enums.TipoSanguineo;
 namespace DOS.Usuario.Data.Mappings
 {
-    public class UsuarioMapping : IEntityTypeConfiguration<UsuarioEntity>
+    public class UsuarioMapping : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<UsuarioEntity> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -24,21 +23,21 @@ namespace DOS.Usuario.Data.Mappings
                 .IsRequired()
                 .HasConversion(
                     cpf => cpf.Numero, 
-                    entrada => new CPFEntity(entrada))
+                    entrada => new CPF(entrada))
                 .HasColumnType("varchar(11)");
 
             builder.Property(x => x.Telefone)
                 .IsRequired()
                 .HasConversion(
                     telefone => telefone.Numero,
-                    entrada => new TelefoneEntity(entrada))
+                    entrada => new Telefone(entrada))
                 .HasColumnType("varchar(15)");
 
             builder.Property(x => x.TipoSanguineo)
                 .HasConversion(
                     tipo => tipo.HasValue ? tipo.Value.ToString() : null,
                     entrada => string.IsNullOrEmpty(entrada) ? null :
-                    (TipoSanguineoEnum)Enum.Parse(typeof(TipoSanguineoEnum), entrada))
+                    (TipoSanguineo)Enum.Parse(typeof(TipoSanguineo), entrada))
                 .HasColumnType("varchar(20)");
 
 

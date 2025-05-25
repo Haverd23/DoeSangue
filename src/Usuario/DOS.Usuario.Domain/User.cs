@@ -4,7 +4,7 @@ using DOS.Usuario.Domain.ValueObjects;
 
 namespace DOS.Usuario.Domain
 {
-    public class Usuario : Entity, IAggregateRoot
+    public class User : Entity, IAggregateRoot
     {
         public string Nome { get; private set; }
         public string Email { get; private set; }
@@ -12,7 +12,7 @@ namespace DOS.Usuario.Domain
         public Telefone Telefone { get; private set; }
         public TipoSanguineo? TipoSanguineo { get; private set; }
 
-        public Usuario(string nome, string email, string cpf, string telefone, TipoSanguineo? tipoSanguineo)
+        public User(string nome, string email, string cpf, string telefone, TipoSanguineo? tipoSanguineo)
         {
             ValidarNome(nome);
             Nome = nome;

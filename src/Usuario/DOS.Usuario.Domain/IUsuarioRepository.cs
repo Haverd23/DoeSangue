@@ -2,10 +2,10 @@
 
 namespace DOS.Usuario.Domain
 {
-    public interface IUsuarioRepository : IRepository<Usuario>
+    public interface IUsuarioRepository : IRepository<User>
     {
-        Task<Usuario> GetByEmail(string email);
-        Task<Usuario> GetById(Guid id);
-        Task Adcionar(Usuario usuario);      
+        Task<User> GetByEmail(string email);
+        Task<User> GetById(Guid id);
+        Task Adcionar(User usuario);      
     }
 }

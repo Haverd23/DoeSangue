@@ -1,8 +1,6 @@
-﻿
-using DOS.Core.Data;
+﻿using DOS.Core.Data;
 using DOS.Usuario.Domain;
 using Microsoft.EntityFrameworkCore;
-
 namespace DOS.Usuario.Data
 {
     public class UsuarioRepository : IUsuarioRepository
@@ -15,16 +13,16 @@ namespace DOS.Usuario.Data
 
         public IUnityOfWork UnitOfWork => _context;
 
-        public async Task Adcionar(Domain.Usuario usuario)
+        public async Task Adcionar(User usuario)
         {
             await _context.Usuarios.AddAsync(usuario);
         }
-        public async Task<Domain.Usuario> GetByEmail(string email)
+        public async Task<User> GetByEmail(string email)
         {
            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public Task<Domain.Usuario> GetById(Guid id)
+        public Task<User> GetById(Guid id)
         {
             return _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
         }
