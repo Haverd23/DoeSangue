@@ -1,13 +1,13 @@
 ﻿using DOS.Core.Data;
+using DOS.Usuario.Domain;
 using Microsoft.EntityFrameworkCore;
-using UsuarioEntity = DOS.Usuario.Domain.Usuario;
 namespace DOS.Usuario.Data
 {
     public class UsuarioContext : DbContext, IUnityOfWork
     {
         public UsuarioContext(DbContextOptions<UsuarioContext> options) : base(options){}
 
-        public DbSet<UsuarioEntity> Usuarios { get; set; }
+        public DbSet<User> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

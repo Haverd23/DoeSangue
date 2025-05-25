@@ -16,7 +16,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act
-            var usuario = new Usuario(nome, email, cpf, telefone, tipoSanguineo);
+            var usuario = new User(nome, email, cpf, telefone, tipoSanguineo);
 
             // Assert
             Assert.NotNull(usuario);
@@ -37,7 +37,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => new Usuario(nome, email, cpf, telefone, tipoSanguineo));
+            var ex = Assert.Throws<Exception>(() => new User(nome, email, cpf, telefone, tipoSanguineo));
         }
         [Fact(DisplayName = "Criar usuário com nome inválido deve lançar exceção")]
         public void Construtor_QuandoNomeInvalido_DeveLancerExcecao()
@@ -50,7 +50,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => new Usuario(nome, email, cpf, telefone, tipoSanguineo));
+            var ex = Assert.Throws<Exception>(() => new User(nome, email, cpf, telefone, tipoSanguineo));
         }
         [Fact(DisplayName = "Criar usuário com telefone inválido deve lançar exceção")]
         public void Construtor_QuandoTelefoneInvalido_DeveLancarExececao()
@@ -63,7 +63,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => new Usuario(nome, email, cpf, telefone, tipoSanguineo));
+            var ex = Assert.Throws<Exception>(() => new User(nome, email, cpf, telefone, tipoSanguineo));
         }
         [Fact(DisplayName = "Alterar telefone com telefone inválido deve lançar exceção")]
         public void AlterarTelefone_QuandoTelefoneInvalido_DeveLancarExcecao()
@@ -74,7 +74,7 @@ namespace UsuarioTests.Domain
             var cpf = "12345678909";
             var telefone = "11987654321";
             var tipoSanguineo = TipoSanguineo.ABNegativo;
-            var usuario = new Usuario(nome, email, cpf, telefone, tipoSanguineo);
+            var usuario = new User(nome, email, cpf, telefone, tipoSanguineo);
             // Act & Assert
             var ex = Assert.Throws<Exception>(() => usuario.AlterTelefone("119876543"));
         }
@@ -87,7 +87,7 @@ namespace UsuarioTests.Domain
             var cpf = "12345678909";
             var telefone = "11987654321";
             var tipoSanguineo = TipoSanguineo.ABNegativo;
-            var usuario = new Usuario(nome, email, cpf, telefone, tipoSanguineo);
+            var usuario = new User(nome, email, cpf, telefone, tipoSanguineo);
             // Act
             usuario.AlterTelefone("11987654322");
             // Assert
