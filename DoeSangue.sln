@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsuarioTests.Domain", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Usuario.Data", "src\Usuario\DOS.Usuario.Data\DOS.Usuario.Data.csproj", "{B188163A-41FF-46D7-98D5-E90C5EAA30D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Usuario.Application", "src\Usuario\DOS.Usuario.Application\DOS.Usuario.Application.csproj", "{025EEF5D-5925-4DD1-B0BE-37EF57C03787}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsuarioTests.Application", "tests\UsuarioTests\UsuarioTests.Application\UsuarioTests.Application.csproj", "{0987046A-EFE8-4EB1-8745-C3741C31347C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,14 @@ Global
 		{B188163A-41FF-46D7-98D5-E90C5EAA30D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B188163A-41FF-46D7-98D5-E90C5EAA30D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B188163A-41FF-46D7-98D5-E90C5EAA30D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{025EEF5D-5925-4DD1-B0BE-37EF57C03787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{025EEF5D-5925-4DD1-B0BE-37EF57C03787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{025EEF5D-5925-4DD1-B0BE-37EF57C03787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{025EEF5D-5925-4DD1-B0BE-37EF57C03787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0987046A-EFE8-4EB1-8745-C3741C31347C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0987046A-EFE8-4EB1-8745-C3741C31347C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0987046A-EFE8-4EB1-8745-C3741C31347C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0987046A-EFE8-4EB1-8745-C3741C31347C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,5 +115,7 @@ Global
 		{C8E59FED-9D6E-4B0D-BFBE-07D5C920A048} = {4A19FC19-3EB1-400C-AFDF-F20CEC4038D2}
 		{7855DCBC-C055-4343-B277-CED804BC4D24} = {C8E59FED-9D6E-4B0D-BFBE-07D5C920A048}
 		{B188163A-41FF-46D7-98D5-E90C5EAA30D1} = {F67D84A0-CFA5-445F-9386-CE5AB9F896AE}
+		{025EEF5D-5925-4DD1-B0BE-37EF57C03787} = {F67D84A0-CFA5-445F-9386-CE5AB9F896AE}
+		{0987046A-EFE8-4EB1-8745-C3741C31347C} = {C8E59FED-9D6E-4B0D-BFBE-07D5C920A048}
 	EndGlobalSection
 EndGlobal
