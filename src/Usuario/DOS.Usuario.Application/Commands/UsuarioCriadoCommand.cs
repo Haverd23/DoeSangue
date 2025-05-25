@@ -20,5 +20,9 @@ namespace DOS.Usuario.Application.Commands
             Telefone = telefone;
             TipoSanguineo = tipoSanguineo;
         }
+        public void SetEmail(string email)
+        {
+            Email = email;
+        }
     }
 }
