@@ -28,12 +28,18 @@ namespace DOS.Usuario.API.Controllers
         {
 
             var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var idString = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
+            if (!Guid.TryParse(idString, out Guid userId))
+            {
+                return Unauthorized("Id do usuário inválido no token.");
+            }
             if (string.IsNullOrEmpty(email))
                 return Unauthorized("Email não encontrado no token.");
 
             var command = new UsuarioCriadoCommand(dto.Nome, dto.CPF, dto.Telefone, dto.TipoSanguineo);
             command.SetEmail(email);
+            command.SetId(userId);
 
             var usuarioId = await _commandDispatcher.DispatchAsync<UsuarioCriadoCommand, Guid>(command);
 

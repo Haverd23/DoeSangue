@@ -14,7 +14,7 @@ namespace DOS.Usuario.Application.CommandsHandlers
         }
         public async Task<Guid> HandleAsync(UsuarioCriadoCommand command)
         {
-            var usuario = new User(command.Nome,command.Email, command.CPF, command.Telefone, command.TipoSanguineo);
+            var usuario = new User(command.Id,command.Nome,command.Email, command.CPF, command.Telefone, command.TipoSanguineo);
             await _usuarioRepository.Adcionar(usuario);
             var sucesso = await _usuarioRepository.UnitOfWork.Commit();
             if (!sucesso)
