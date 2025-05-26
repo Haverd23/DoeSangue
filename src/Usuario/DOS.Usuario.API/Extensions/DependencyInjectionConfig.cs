@@ -2,6 +2,7 @@
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Application.CommandsHandlers;
 using DOS.Usuario.Data;
+using DOS.Usuario.Data.Mediator;
 using DOS.Usuario.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ namespace DOS.Usuario.API.Extensions
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICommandHandler<UsuarioCriadoCommand, Guid>, UsuarioCriadoCommandHandler>();
 
+            services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UsuarioContext>(options =>
