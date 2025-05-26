@@ -2,10 +2,12 @@
 using DOS.Agenda.Application.Commands;
 using DOS.Agenda.Domain;
 using DOS.Core.Mediator.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DOS.Agenda.API.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class AgendaController : ControllerBase
