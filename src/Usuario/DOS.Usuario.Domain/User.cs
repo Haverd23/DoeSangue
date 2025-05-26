@@ -14,7 +14,8 @@ namespace DOS.Usuario.Domain
 
         protected User() { }
 
-        public User(string nome, string email, string cpf, string telefone, TipoSanguineo? tipoSanguineo)
+        public User(Guid id,string nome, string email, string cpf, string telefone,
+            TipoSanguineo? tipoSanguineo) : base(id)
         {
             ValidarNome(nome);
             Nome = nome;

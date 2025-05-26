@@ -5,6 +5,7 @@ namespace DOS.Usuario.Application.Commands
 {
     public class UsuarioCriadoCommand : ICommand<Guid>
     {
+        public Guid Id { get; private set; }
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         public string Telefone { get; private set; }
@@ -22,6 +23,10 @@ namespace DOS.Usuario.Application.Commands
         public void SetEmail(string email)
         {
             Email = email;
+        }
+        public void SetId(Guid id)
+        {
+            Id = id;
         }
     }
 }
