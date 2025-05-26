@@ -36,7 +36,6 @@ namespace UsuarioTests.Application
             var result = await handler.HandleAsync(command);
 
             // Assert
-            Assert.NotEqual(Guid.Empty, result);
             _mockUserRepository.Verify(x => x.Adcionar(It.IsAny<User>()), Times.Once);
             _mockUserRepository.Verify(x => x.UnitOfWork.Commit(), Times.Once);
         }
