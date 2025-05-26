@@ -1,0 +1,50 @@
+﻿using DOS.Agenda.Domain;
+using DOS.Core.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace DOS.Agenda.Data
+{
+    public class HorarioRepository : IHorarioRepository
+    {
+        private readonly HorarioContext _context;
+        public HorarioRepository(HorarioContext context)
+        {
+            _context = context;
+        }
+
+        public IUnityOfWork UnitOfWork => _context;
+
+        public async Task Adicionar(Horario horario)
+        {
+            await _context.Horarios.AddAsync(horario);
+        }
+
+        public Task Atualizar(Horario horario)
+        {
+            _context.Horarios.Update(horario);
+            return Task.CompletedTask;
+        }
+        public async Task<IEnumerable<Horario>> ObterPorDataAsync(DateTime data)
+        {
+            return await _context.Horarios
+                .Where(h => h.DataHora.Date == data.Date)
+                .ToListAsync();
+        }
+
+        public async Task<Horario?> ObterPorIdAsync(Guid id)
+        {
+            return await _context.Horarios
+                .FirstOrDefaultAsync(h => h.Id == id);
+        }
+
+        public async Task<IEnumerable<Horario>> ObterTodosDisponiveisAsync()
+        {
+            return await _context.Horarios
+                .Where(h => h.VagasOcupadas < h.VagasTotais).ToListAsync();
+        }
+        public void Dispose()
+        {
+            _context?.Dispose();
+        }
+    }
+}
