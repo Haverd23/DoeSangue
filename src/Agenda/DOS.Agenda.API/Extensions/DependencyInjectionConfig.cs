@@ -5,7 +5,6 @@ using DOS.Agenda.Data.Mediator;
 using DOS.Agenda.Domain;
 using DOS.Core.Mediator.Commands;
 using Microsoft.EntityFrameworkCore;
-
 namespace DOS.Agenda.API.Extensions
 {
     public static class DependencyInjectionConfig

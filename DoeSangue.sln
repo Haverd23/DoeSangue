@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Agenda.Application", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenda.Tests.Application", "tests\AgendaTests\Agenda.Tests.Application\Agenda.Tests.Application.csproj", "{4F46540B-4D50-42B2-9F22-D394F76EB654}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Agenda.API", "src\Agenda\DOS.Agenda.API\DOS.Agenda.API.csproj", "{363DE31B-D14B-4395-8BD0-57F96CD0DF4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{4F46540B-4D50-42B2-9F22-D394F76EB654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F46540B-4D50-42B2-9F22-D394F76EB654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F46540B-4D50-42B2-9F22-D394F76EB654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363DE31B-D14B-4395-8BD0-57F96CD0DF4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363DE31B-D14B-4395-8BD0-57F96CD0DF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363DE31B-D14B-4395-8BD0-57F96CD0DF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363DE31B-D14B-4395-8BD0-57F96CD0DF4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,5 +171,6 @@ Global
 		{4047B01D-2B96-4517-ABA3-C7EA6D4C606C} = {50015A31-038A-4CF3-931E-42A8D854751D}
 		{71E6AD2B-2E77-4790-8655-53E784FC4486} = {50015A31-038A-4CF3-931E-42A8D854751D}
 		{4F46540B-4D50-42B2-9F22-D394F76EB654} = {72C75191-1500-41AF-84FC-D79F2AAC3FF3}
+		{363DE31B-D14B-4395-8BD0-57F96CD0DF4E} = {50015A31-038A-4CF3-931E-42A8D854751D}
 	EndGlobalSection
 EndGlobal
