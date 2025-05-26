@@ -12,6 +12,8 @@ namespace DOS.Usuario.Domain
         public Telefone Telefone { get; private set; }
         public TipoSanguineo? TipoSanguineo { get; private set; }
 
+        protected User() { }
+
         public User(string nome, string email, string cpf, string telefone, TipoSanguineo? tipoSanguineo)
         {
             ValidarNome(nome);

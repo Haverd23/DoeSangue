@@ -11,11 +11,10 @@ namespace DOS.Usuario.Application.Commands
         public string Email { get; private set; }
         public TipoSanguineo TipoSanguineo { get; private set; }
 
-        public UsuarioCriadoCommand(string nome,string email,
+        public UsuarioCriadoCommand(string nome,
             string cpf, string telefone, TipoSanguineo tipoSanguineo)
         {
             Nome = nome;
-            Email = email;
             CPF = cpf;
             Telefone = telefone;
             TipoSanguineo = tipoSanguineo;
