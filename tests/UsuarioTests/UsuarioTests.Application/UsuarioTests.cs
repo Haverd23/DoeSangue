@@ -26,7 +26,7 @@ namespace UsuarioTests.Application
             var telefone = "11987654321";
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
-            var command = new UsuarioCriadoCommand(nome, email, cpf, telefone, tipoSanguineo);
+            var command = new UsuarioCriadoCommand(nome,cpf, telefone, tipoSanguineo);
             var handler = new UsuarioCriadoCommandHandler(_mockUserRepository.Object);
 
             _mockUserRepository.Setup(x => x.UnitOfWork.Commit())
