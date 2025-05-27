@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoacaoTests.Domain", "tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoacaoTests.Application", "tests\DoacaoTests\DoacaoTests.Application\DoacaoTests.Application.csproj", "{B974A700-1133-4AF4-B7CD-5BD177FBC42A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Doacao.API", "src\Doacao\DOS.Doacao.API\DOS.Doacao.API.csproj", "{A1E1D740-115C-4D65-A1A0-48E83E5E3B96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,6 +177,10 @@ Global
 		{B974A700-1133-4AF4-B7CD-5BD177FBC42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B974A700-1133-4AF4-B7CD-5BD177FBC42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B974A700-1133-4AF4-B7CD-5BD177FBC42A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E1D740-115C-4D65-A1A0-48E83E5E3B96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E1D740-115C-4D65-A1A0-48E83E5E3B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E1D740-115C-4D65-A1A0-48E83E5E3B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E1D740-115C-4D65-A1A0-48E83E5E3B96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,5 +219,6 @@ Global
 		{AD5A1021-B42C-4F76-81EE-CAE032AB6C28} = {8C96C702-659E-4782-B70E-C317BE8345FF}
 		{4052F203-514A-4E61-ACC9-EB2895BB2D2D} = {B29741BE-C9EB-4D1F-8099-B1906992E4CB}
 		{B974A700-1133-4AF4-B7CD-5BD177FBC42A} = {B29741BE-C9EB-4D1F-8099-B1906992E4CB}
+		{A1E1D740-115C-4D65-A1A0-48E83E5E3B96} = {8C96C702-659E-4782-B70E-C317BE8345FF}
 	EndGlobalSection
 EndGlobal
