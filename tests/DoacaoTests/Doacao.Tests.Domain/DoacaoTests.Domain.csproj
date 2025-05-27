@@ -10,21 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="UnitTest1.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Doacao\DOS.Doacao.Application\DOS.Doacao.Application.csproj" />
-    <ProjectReference Include="..\..\..\src\Doacao\DOS.Doacao.Data\DOS.Doacao.Data.csproj" />
-    <ProjectReference Include="..\..\..\src\Usuario\DOS.Usuario.Domain\DOS.Usuario.Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\Doacao\DOS.Doacao.Domain\DOS.Doacao.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
