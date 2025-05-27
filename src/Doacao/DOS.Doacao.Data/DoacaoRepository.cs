@@ -1,4 +1,5 @@
-﻿using DOS.Core.Data;
+﻿
+using DOS.Core.Data;
 using DOS.Doacao.Domain;
 using DOS.Doacao.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
