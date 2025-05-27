@@ -8,7 +8,7 @@ namespace Agenda.Tests.Domain
         public void Construtor_QuandoDadosValidos_DeveInstanciar()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1); 
             var vagasTotais = 10;
 
             // Act
@@ -25,7 +25,7 @@ namespace Agenda.Tests.Domain
         public void Construtor_QuandoVagasTotaisInvalido_DeveLancarExcecao()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = -1;
 
             // Act & Assert
@@ -47,7 +47,7 @@ namespace Agenda.Tests.Domain
         public void ReservarVaga_DeveIncrementarVagasOcupadas()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = 10;
             var horario = new Horario(dataHora, vagasTotais);
 
@@ -62,7 +62,7 @@ namespace Agenda.Tests.Domain
         public void ReservarVaga_QuandoSemVagasDisponiveis_DeveLancarExcecao()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = 1;
             var horario = new Horario(dataHora, vagasTotais);
             horario.ReservarVaga(); 
@@ -75,7 +75,7 @@ namespace Agenda.Tests.Domain
         public void LiberarVaga_DeveDecrementarVagasOcupadas()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = 10;
             var horario = new Horario(dataHora, vagasTotais);
             horario.ReservarVaga();
@@ -91,7 +91,7 @@ namespace Agenda.Tests.Domain
         public void LiberarVaga_QuandoSemVagasOcupadas_DeveLancarExcecao()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = 10;
             var horario = new Horario(dataHora, vagasTotais);
 
@@ -103,7 +103,7 @@ namespace Agenda.Tests.Domain
         public void TemVagasDisponiveis_QuandoHouverVagas_DeveRetornarTrue()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = 10;
             var horario = new Horario(dataHora, vagasTotais);
 
@@ -117,7 +117,7 @@ namespace Agenda.Tests.Domain
         public void TemVagasDisponiveis_QuandoNaoHouverVagas_DeveRetornarFalse()
         {
             // Arrange
-            var dataHora = new DateTime(2025, 5, 27, 14, 30, 0);
+            DateTime dataHora = DateTime.UtcNow.AddDays(1);
             var vagasTotais = 1;
             var horario = new Horario(dataHora, vagasTotais);
             horario.ReservarVaga();
