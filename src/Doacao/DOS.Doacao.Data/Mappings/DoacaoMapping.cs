@@ -12,12 +12,10 @@ namespace DOS.Doacao.Data.Mappings
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.AgendaId)
-                .IsRequired()
-                .HasColumnType("int");
+                .IsRequired();
 
             builder.Property(x => x.UsuarioId)
-                .IsRequired()
-                .HasColumnType("int");
+                .IsRequired();
 
             builder.Property(x => x.DataHoraAgendada)
                 .IsRequired()
