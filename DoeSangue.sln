@@ -83,6 +83,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EstoqueTests", "EstoqueTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstoqueTests.Domain", "tests\EstoqueTests\EstoqueTests.Domain\EstoqueTests.Domain.csproj", "{46893F9C-4A87-42CC-9216-61E89DCDA444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOS.Estoque.Data", "src\Estoque\DOS.Estoque.Data\DOS.Estoque.Data.csproj", "{CE9313BB-85BD-4A2E-B1FA-6ECFEA1E1B1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,10 @@ Global
 		{46893F9C-4A87-42CC-9216-61E89DCDA444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46893F9C-4A87-42CC-9216-61E89DCDA444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46893F9C-4A87-42CC-9216-61E89DCDA444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE9313BB-85BD-4A2E-B1FA-6ECFEA1E1B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE9313BB-85BD-4A2E-B1FA-6ECFEA1E1B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE9313BB-85BD-4A2E-B1FA-6ECFEA1E1B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE9313BB-85BD-4A2E-B1FA-6ECFEA1E1B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -240,5 +246,6 @@ Global
 		{741FA7CF-CCD1-45EF-A394-FCB7D3CD650E} = {51561641-89C2-4CE8-B681-C987A11C5D36}
 		{A157723F-AF30-4D47-8F2B-0F500296F821} = {4A19FC19-3EB1-400C-AFDF-F20CEC4038D2}
 		{46893F9C-4A87-42CC-9216-61E89DCDA444} = {A157723F-AF30-4D47-8F2B-0F500296F821}
+		{CE9313BB-85BD-4A2E-B1FA-6ECFEA1E1B1C} = {51561641-89C2-4CE8-B681-C987A11C5D36}
 	EndGlobalSection
 EndGlobal
