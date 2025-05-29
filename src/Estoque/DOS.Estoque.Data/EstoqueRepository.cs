@@ -1,4 +1,6 @@
-﻿using DOS.Core.Data;
+﻿
+
+using DOS.Core.Data;
 using DOS.Estoque.Domain;
 using DOS.Estoque.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
