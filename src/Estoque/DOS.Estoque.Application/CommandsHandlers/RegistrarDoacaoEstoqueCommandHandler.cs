@@ -14,8 +14,7 @@ namespace DOS.Estoque.Application.CommandsHandlers
 
         public async Task<bool> HandleAsync(RegistrarDoacaoEstoqueCommand command)
         {
-            var estoque = await _estoqueRepository
-                .ObterPorTipoAsync(command.TipoSanguineo);
+            var estoque = await _estoqueRepository.ObterPorTipoAsync(command.TipoSanguineo);
 
             if (estoque == null)
             {
@@ -25,11 +24,15 @@ namespace DOS.Estoque.Application.CommandsHandlers
             }
             else
             {
-                estoque.RegistrarDoacao();
-                _estoqueRepository.Atualizar(estoque);
+                var alterado = estoque.RegistrarDoacao();
+
+                if (alterado)
+                    _estoqueRepository.Atualizar(estoque);
             }
 
             return await _estoqueRepository.UnitOfWork.Commit();
         }
+
+
     }
 }

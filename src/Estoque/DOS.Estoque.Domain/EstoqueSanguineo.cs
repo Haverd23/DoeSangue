@@ -8,7 +8,7 @@ namespace DOS.Estoque.Domain
         public TipoSanguineo Tipo { get; private set; }
         public int Unidades { get; private set; }
 
-        private int _contadorDoacoes;
+        public int ContadorDoacoes { get; private set; }
 
         protected EstoqueSanguineo() { }
 
@@ -16,18 +16,22 @@ namespace DOS.Estoque.Domain
         {
             Tipo = tipo;
             Unidades = 0;
-            _contadorDoacoes = 0;
+            ContadorDoacoes = 0;
         }
-        public void RegistrarDoacao()
+        public bool RegistrarDoacao()
         {
-            _contadorDoacoes++;
+            ContadorDoacoes++;
 
-            if (_contadorDoacoes >= 5)
+            if (ContadorDoacoes >= 5)
             {
                 Unidades++;
-                _contadorDoacoes = 0;
+                ContadorDoacoes = 0;
+                return true; 
             }
+
+            return false; 
         }
+
 
         public void RetirarUnidade()
         {

@@ -1,6 +1,7 @@
 ﻿using DOS.Estoque.Domain;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace DOS.Estoque.Data.Mappings
 {
@@ -17,7 +18,11 @@ namespace DOS.Estoque.Data.Mappings
                 .HasConversion<string>(); 
 
             builder.Property(e => e.Unidades)
+            .IsRequired();
+
+            builder.Property(e => e.ContadorDoacoes)
                 .IsRequired();
+
 
             builder.Ignore("_contadorDoacoes");
         }
