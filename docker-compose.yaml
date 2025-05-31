@@ -1,0 +1,97 @@
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${DB_SA_PASSWORD}
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      app-network:
+        aliases:
+          - sql
+         
+
+  agenda-api:
+    build:
+      context: ./src
+      dockerfile: Agenda/DOS.Agenda.API/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - DEFAULT_CONNECTION=${DEFAULT_CONNECTION}
+      - AppSettings__SecretKey=${AppSettings__SecretKey}
+    ports:
+      - "5001:8080"
+    networks:
+      - app-network
+
+  auth-api:
+    build:
+      context: ./src
+      dockerfile: Auth/DOS.Auth.API/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - DEFAULT_CONNECTION=${DEFAULT_CONNECTION}
+      - AppSettings__SecretKey=${AppSettings__SecretKey}
+    ports:
+      - "5002:8080"
+    networks:
+      - app-network
+
+  doacao-api:
+    build:
+      context: ./src
+      dockerfile: Doacao/DOS.Doacao.API/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - DEFAULT_CONNECTION=${DEFAULT_CONNECTION}
+      - AppSettings__SecretKey=${AppSettings__SecretKey}
+    ports:
+      - "5003:8080"
+    networks:
+      - app-network
+
+  estoque-api:
+    build:
+      context: ./src
+      dockerfile: Estoque/DOS.Estoque.API/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - DEFAULT_CONNECTION=${DEFAULT_CONNECTION}
+      - AppSettings__SecretKey=${AppSettings__SecretKey}
+    ports:
+      - "5004:8080"
+    networks:
+      - app-network
+
+  usuario-api:
+    build:
+      context: ./src
+      dockerfile: Usuario/DOS.Usuario.API/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - DEFAULT_CONNECTION=${DEFAULT_CONNECTION}
+      - AppSettings__SecretKey=${AppSettings__SecretKey}
+    ports:
+      - "5005:8080"
+    networks:
+      - app-network
+
+volumes:
+  mssql_data:
+
+networks:
+  app-network:
+    driver: bridge
