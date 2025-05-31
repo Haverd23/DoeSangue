@@ -17,7 +17,7 @@ namespace DOS.Usuario.API.Extensions
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<UsuarioContext>(options =>
                         options.UseSqlServer(connectionString));
 

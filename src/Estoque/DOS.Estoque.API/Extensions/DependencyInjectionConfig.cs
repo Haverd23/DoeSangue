@@ -19,7 +19,7 @@ namespace DOS.Estoque.API.Extensions
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<EstoqueContext>(options =>
                         options.UseSqlServer(connectionString));
 
