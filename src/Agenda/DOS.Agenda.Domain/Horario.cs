@@ -39,7 +39,7 @@ namespace DOS.Agenda.Domain
         {
             if (VagasTotais <= 0)
                 throw new ArgumentException("O número total de vagas deve ser maior que zero.");
-            if (DataHora < DateTime.Now)
+            if (DataHora < DateTime.UtcNow)
                 throw new ArgumentException("A data e hora do horário não podem ser no passado.");
         }
     }

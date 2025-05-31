@@ -111,3 +111,8 @@ artifacts/
 
 ## SonarQube
 .sonar/
+
+## Environment variables
+.env
+.env.*
+

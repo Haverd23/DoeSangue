@@ -2,7 +2,7 @@
 {
     public class CriarHorarioDTO
     {
-        public DateTime DataHora { get; set; }
+        public DateTime DataHora { get; set; } 
         public int NumeroVagas { get; set; }
     }
 }

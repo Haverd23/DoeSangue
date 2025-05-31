@@ -21,7 +21,7 @@ namespace DOS.Doacao.API.Extensions
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<DoacaoContext>(options =>
                         options.UseSqlServer(connectionString));
 

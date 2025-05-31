@@ -22,10 +22,9 @@ namespace DOS.Auth.API.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IDomainEventDispatcher, UserCriadoEventDispatching>();
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
-
-
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddScoped<ICommandHandler<UsuarioCriadoCommand, Guid>, UsuarioCriadoCommandHandler>();
+
+            var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<UserContext>(options =>
                         options.UseSqlServer(connectionString));
 

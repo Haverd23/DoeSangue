@@ -1,33 +1,58 @@
 using DOS.Usuario.API.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using DOS.Usuario.Data;
+using Microsoft.EntityFrameworkCore;
+using Polly.Retry;
+using Polly;
+
+
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+if (environment == "Development")
+{
+    DotNetEnv.Env.Load();
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Configuration.AddEnvironmentVariables();
+
+var secretKey = builder.Configuration["AppSettings:SecretKey"];
+var connectionString = builder.Configuration["DEFAULT_CONNECTION"];
+
+builder.Services.AddDependencyInjection(builder.Configuration);
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 builder.Services.AddControllers();
-builder.Services.AddDependencyInjection(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var context = scope.ServiceProvider.GetRequiredService<UsuarioContext>();
+
+    RetryPolicy retryPolicy = Policy
+        .Handle<Exception>()
+        .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(5),
+            (exception, timeSpan, retryCount, contextLog) =>
+            {
+                Console.WriteLine($"Tentativa {retryCount} falhou. Aguardando {timeSpan.TotalSeconds}s...");
+                Console.WriteLine($"Erro: {exception.Message}");
+            });
+
+    retryPolicy.Execute(() =>
+    {
+        context.Database.Migrate();
+    });
 }
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.MapControllers();
-
 app.Run();

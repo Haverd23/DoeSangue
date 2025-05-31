@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DOS.Agenda.API.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class AgendaController : ControllerBase

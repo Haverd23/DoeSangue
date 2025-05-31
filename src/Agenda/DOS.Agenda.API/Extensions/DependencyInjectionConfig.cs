@@ -16,9 +16,10 @@ namespace DOS.Agenda.API.Extensions
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<HorarioContext>(options =>
-                        options.UseSqlServer(connectionString));
+                options.UseSqlServer(connectionString));
+
 
 
             return services;
