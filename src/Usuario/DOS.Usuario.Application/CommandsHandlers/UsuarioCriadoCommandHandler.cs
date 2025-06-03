@@ -1,4 +1,5 @@
-﻿using DOS.Core.Mediator.Commands;
+﻿using DOS.Core.DomainObjects;
+using DOS.Core.Mediator.Commands;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Domain;
 
@@ -7,6 +8,8 @@ namespace DOS.Usuario.Application.CommandsHandlers
     public class UsuarioCriadoCommandHandler : ICommandHandler<UsuarioCriadoCommand, Guid>
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IDomainEventDispatcher _domainEventDispatcher;
+
 
         public UsuarioCriadoCommandHandler(IUsuarioRepository usuarioRepository)
         {
@@ -21,6 +24,7 @@ namespace DOS.Usuario.Application.CommandsHandlers
             {
                 throw new Exception("Erro ao salvar o usuário");
             }
+            await _domainEventDispatcher.DispatchEventsAsync(usuario.DomainEvents);
             return usuario.Id;
         }
     }
