@@ -23,6 +23,7 @@ namespace DOS.Usuario.Domain
             CPF = new CPF(cpf);
             Telefone = new Telefone(telefone);
             TipoSanguineo = tipoSanguineo;
+            AddDomainEvent(new UsuarioCriadoEvent(nome,email));
         }
         public void AlterTelefone(string telefone)
         {
