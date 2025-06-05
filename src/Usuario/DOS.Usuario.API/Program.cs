@@ -16,8 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables();
 
-var secretKey = builder.Configuration["AppSettings:SecretKey"];
-var connectionString = builder.Configuration["DEFAULT_CONNECTION"];
+
 
 builder.Services.AddDependencyInjection(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);
