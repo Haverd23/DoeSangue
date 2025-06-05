@@ -20,8 +20,7 @@ builder.Configuration.AddEnvironmentVariables();
 var secretKey = builder.Configuration["AppSettings:SecretKey"];
 var connectionString = builder.Configuration["DEFAULT_CONNECTION"];
 
-builder.Services.AddDependencyInjection(builder.Configuration);
-builder.Services.AddJwtAuthentication(builder.Configuration);
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
