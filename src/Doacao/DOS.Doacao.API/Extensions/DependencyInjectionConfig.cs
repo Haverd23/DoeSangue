@@ -1,8 +1,10 @@
-﻿using DOS.Core.Mediator.Commands;
+﻿using DOS.Core.DomainObjects;
+using DOS.Core.Mediator.Commands;
 using DOS.Core.Message;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.CommandsHandlers;
 using DOS.Doacao.Data;
+using DOS.Doacao.Data.EventDispatching;
 using DOS.Doacao.Data.Mediator;
 using DOS.Doacao.Data.Message;
 using DOS.Doacao.Domain;
@@ -22,7 +24,7 @@ namespace DOS.Doacao.API.Extensions
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer("localhost:9092"));
-
+            services.AddScoped<IDomainEventDispatcher, EventDispatching>();
 
 
             var connectionString = configuration["DEFAULT_CONNECTION"];
