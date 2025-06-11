@@ -21,14 +21,26 @@ namespace DOS.Doacao.API.Controllers
         [HttpPost("agendar")]
         public async Task<IActionResult> Agendar([FromBody] AgendarDoacaoDTO request)
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (!Guid.TryParse(userIdClaim.Value, out var userId))
-                return BadRequest("UserId inválido nas claims");
+            var idString = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!Guid.TryParse(idString, out Guid userId))
+            {
+                return Unauthorized("Id do usuário inválido no token.");
+            }
+
 
             var command = new AgendarDoacaoCommand(request.AgendaId, request.DataHoraAgendada);
             command.UserId = userId;
             var doacaoId = await _commandDispatcher.DispatchAsync<AgendarDoacaoCommand, Guid>(command);
             return CreatedAtAction(nameof(Agendar), new { id = doacaoId }, doacaoId);
+        }
+
+        [Authorize(Roles = "Administrador")]
+        [HttpPost("iniciar")]
+        public async Task<IActionResult> Iniciar([FromBody] DoacaoRealizadaDTO request)
+        {
+            var command = new DoacaoRealizadaCommand(request.DoacaoId);
+            var doacaoId = await _commandDispatcher.DispatchAsync<DoacaoRealizadaCommand, bool>(command);
+            return NoContent();
         }
     }
 }

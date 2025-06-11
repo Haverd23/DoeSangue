@@ -24,6 +24,10 @@ namespace DOS.Doacao.Application.CommandsHandlers
         public async Task<Guid> HandleAsync(AgendarDoacaoCommand command)
         {
             var usuario = await _usuarioRepository.GetById(command.UserId);
+            if (usuario == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
             string? tipoSanguineo = usuario?.TipoSanguineo?.ToString();
 
             var doacao = new DoacaoRegistro(
