@@ -23,6 +23,8 @@ namespace DOS.Doacao.API.Extensions
             services.AddScoped<ICommandHandler<AgendarDoacaoCommand, Guid>, AgendarDoacaoCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoRealizadaCommand,bool>, DoacaoRealizadaCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoFinalizadaCommand, bool>, DoacaoFinalizadaCommandHandler>();
+            services.AddScoped<ICommandHandler<DoacaoFalhaCommand, bool>, DoacaoFalhaCommandHandler>();
+
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
