@@ -42,6 +42,14 @@ namespace DOS.Doacao.API.Controllers
             var doacaoId = await _commandDispatcher.DispatchAsync<DoacaoRealizadaCommand, bool>(command);
             return NoContent();
         }
+        [Authorize(Roles = "Administrador")]
+        [HttpPost("finalizar")]
+        public async Task<IActionResult> Finalizar([FromBody] DoacaoFinalizadaDTO request)
+        {
+            var command = new DoacaoFinalizadaCommand(request.DoacaoId);
+            var doacaoId = await _commandDispatcher.DispatchAsync<DoacaoFinalizadaCommand, bool>(command);
+            return NoContent();
+        }
     }
 }
 
