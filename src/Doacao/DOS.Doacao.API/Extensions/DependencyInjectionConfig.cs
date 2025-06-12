@@ -22,6 +22,8 @@ namespace DOS.Doacao.API.Extensions
             services.AddScoped<IDoacaoRepository, DoacaoRepository>();
             services.AddScoped<ICommandHandler<AgendarDoacaoCommand, Guid>, AgendarDoacaoCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoRealizadaCommand,bool>, DoacaoRealizadaCommandHandler>();
+            services.AddScoped<ICommandHandler<DoacaoFinalizadaCommand, bool>, DoacaoFinalizadaCommandHandler>();
+
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer("localhost:9092"));
