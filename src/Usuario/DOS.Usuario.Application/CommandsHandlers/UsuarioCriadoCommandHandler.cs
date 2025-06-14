@@ -11,9 +11,11 @@ namespace DOS.Usuario.Application.CommandsHandlers
         private readonly IDomainEventDispatcher _domainEventDispatcher;
 
 
-        public UsuarioCriadoCommandHandler(IUsuarioRepository usuarioRepository)
+        public UsuarioCriadoCommandHandler(IUsuarioRepository usuarioRepository,
+            IDomainEventDispatcher domainEventDispatcher)
         {
             _usuarioRepository = usuarioRepository;
+            _domainEventDispatcher = domainEventDispatcher;
         }
         public async Task<Guid> HandleAsync(UsuarioCriadoCommand command)
         {

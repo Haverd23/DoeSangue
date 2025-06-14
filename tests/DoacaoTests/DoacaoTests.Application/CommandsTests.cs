@@ -1,5 +1,4 @@
-﻿
-using DOS.Core.Data;
+﻿using DOS.Core.DomainObjects;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.CommandsHandlers;
 using DOS.Doacao.Domain;
@@ -14,12 +13,20 @@ namespace DoacaoTests.Application
         private readonly Mock<IDoacaoRepository> _mockDoacaoRepository;
         private readonly Mock<IUsuarioRepository> _mockUsuarioRepository;
         private readonly AgendarDoacaoCommandHandler _handler;
+        private readonly Mock<IDomainEventDispatcher> _mockDomainEventDispatcher;
+
 
         public CommandsTests()
         {
+            _mockDomainEventDispatcher = new Mock<IDomainEventDispatcher>();
+
             _mockDoacaoRepository = new Mock<IDoacaoRepository>();
             _mockUsuarioRepository = new Mock<IUsuarioRepository>();
-            _handler = new AgendarDoacaoCommandHandler(_mockDoacaoRepository.Object, _mockUsuarioRepository.Object);
+            _handler = new AgendarDoacaoCommandHandler(
+                        _mockDoacaoRepository.Object,
+                        _mockUsuarioRepository.Object,
+                        _mockDomainEventDispatcher.Object
+                    );
         }
 
         [Fact(DisplayName = "Deve criar doação e retornar Id")]
@@ -52,16 +59,16 @@ namespace DoacaoTests.Application
                 .Setup(r => r.UnitOfWork.Commit())
                 .ReturnsAsync(true);
 
-            var command = new AgendarDoacaoCommand(agendaId, dataAgendada);
-            command.UserId = usuarioId;
-
-            var handler = new AgendarDoacaoCommandHandler(_mockDoacaoRepository.Object, _mockUsuarioRepository.Object);
+            var command = new AgendarDoacaoCommand(agendaId, dataAgendada)
+            {
+                UserId = usuarioId
+            };
 
             // Act
-            var result = await handler.HandleAsync(command);
+            var result = await _handler.HandleAsync(command);
 
+            // Assert
             Assert.NotEqual(Guid.Empty, result);
-
             _mockUsuarioRepository.Verify(r => r.GetById(usuarioId), Times.Once);
             _mockDoacaoRepository.Verify(r => r.AdicionarAsync(It.IsAny<DoacaoRegistro>()), Times.Once);
             _mockDoacaoRepository.Verify(r => r.UnitOfWork.Commit(), Times.Once);

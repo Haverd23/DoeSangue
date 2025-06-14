@@ -1,9 +1,10 @@
 ﻿using DOS.Notificacao.Application.Events.Usuario;
+using DOS.Notificacao.Application.Kafka;
 using DOS.Notificacao.Domain;
 
 namespace DOS.Notificacao.Application.EventsHandlers.Usuario
 {
-    public class UsuarioCriadoEventHandler
+    public class UsuarioCriadoEventHandler : IKafkaEventHandler<UsuarioCriadoEvent>
     {
         private readonly IEmailService _emailService;
 
@@ -64,10 +65,7 @@ namespace DOS.Notificacao.Application.EventsHandlers.Usuario
                     <p>Seu cadastro no <strong>Sistema de Doação de Sangue</strong> foi realizado com sucesso.</p>
                     <p>Estamos muito felizes em ter você conosco nessa missão de <strong>salvar vidas</strong>.</p>
 
-                    <div class='info'>
-                        <p><strong>Nome:</strong> {evento.Nome}</p>
-                        <p><strong>Email:</strong> {evento.Email}</p>
-                    </div>
+                  
 
                     <p>Agora você pode acessar sua conta, agendar doações e acompanhar suas contribuições.</p>
 
