@@ -1,0 +1,6 @@
+@DOS.Notificacao.API_HostAddress = http://localhost:5043
+
+GET {{DOS.Notificacao.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
