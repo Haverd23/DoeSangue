@@ -1,4 +1,5 @@
 ﻿using DOS.Core.Data;
+using DOS.Core.DomainObjects;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Application.CommandsHandlers;
 using DOS.Usuario.Domain;
@@ -10,10 +11,13 @@ namespace UsuarioTests.Application
     public class UsuarioTests
     {
         private readonly Mock<IUsuarioRepository> _mockUserRepository;
+        private readonly Mock<IDomainEventDispatcher> _mockDomainEventDispatcher = new();
+
 
         public UsuarioTests()
         {
             _mockUserRepository = new Mock<IUsuarioRepository>();
+            _mockDomainEventDispatcher = new Mock<IDomainEventDispatcher>();
         }
 
         [Fact(DisplayName = "Deve criar um usuário e retornar o ID")]
@@ -27,7 +31,10 @@ namespace UsuarioTests.Application
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             var command = new UsuarioCriadoCommand(nome,cpf, telefone, tipoSanguineo);
-            var handler = new UsuarioCriadoCommandHandler(_mockUserRepository.Object);
+            var handler = new UsuarioCriadoCommandHandler(
+                                _mockUserRepository.Object,
+                                _mockDomainEventDispatcher.Object
+                            );
 
             _mockUserRepository.Setup(x => x.UnitOfWork.Commit())
                 .ReturnsAsync(true);
