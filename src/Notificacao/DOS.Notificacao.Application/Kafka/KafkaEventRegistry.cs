@@ -2,10 +2,6 @@
 using DOS.Notificacao.Application.Events.Usuario;
 using DOS.Notificacao.Application.EventsHandlers.Doacao;
 using DOS.Notificacao.Application.EventsHandlers.Usuario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -19,6 +15,7 @@ namespace DOS.Notificacao.Application.Kafka
         {
             Register<UsuarioCriadoEvent, UsuarioCriadoEventHandler>("UsuarioCriadoEvent");
             Register<DoacaoAgendadaEvent, DoacaoAgendadaEventHandler>("DoacaoAgendadaEvent");
+            Register<DoacaoRealizadaEvent, DoacaoRealizadaEventHandler>("DoacaoRealizadaEvent");
         }
 
         private void Register<TEvent, THandler>(string topic)
