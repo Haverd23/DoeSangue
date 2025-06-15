@@ -1,4 +1,6 @@
-﻿using DOS.Notificacao.Application.Events.Usuario;
+﻿using DOS.Notificacao.Application.Events.Doacao;
+using DOS.Notificacao.Application.Events.Usuario;
+using DOS.Notificacao.Application.EventsHandlers.Doacao;
 using DOS.Notificacao.Application.EventsHandlers.Usuario;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace DOS.Notificacao.Application.Kafka
         public KafkaEventRegistry()
         {
             Register<UsuarioCriadoEvent, UsuarioCriadoEventHandler>("UsuarioCriadoEvent");
+            Register<DoacaoAgendadaEvent, DoacaoAgendadaEventHandler>("DoacaoAgendadaEvent");
         }
 
         private void Register<TEvent, THandler>(string topic)

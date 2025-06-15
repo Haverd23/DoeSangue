@@ -1,4 +1,5 @@
-﻿using DOS.Notificacao.Application.EventsHandlers.Usuario;
+﻿using DOS.Notificacao.Application.EventsHandlers.Doacao;
+using DOS.Notificacao.Application.EventsHandlers.Usuario;
 using DOS.Notificacao.Application.Kafka;
 using DOS.Notificacao.Data;
 using DOS.Notificacao.Domain;
@@ -12,6 +13,7 @@ namespace DOS.Notificacao.API.Extensions
         {
             // Eventos
             services.AddScoped<UsuarioCriadoEventHandler>();
+            services.AddScoped<DoacaoAgendadaEventHandler>();
 
 
             // Email
