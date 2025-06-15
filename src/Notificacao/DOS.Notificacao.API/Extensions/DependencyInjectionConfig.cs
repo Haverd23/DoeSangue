@@ -15,6 +15,7 @@ namespace DOS.Notificacao.API.Extensions
             services.AddScoped<UsuarioCriadoEventHandler>();
             services.AddScoped<DoacaoAgendadaEventHandler>();
             services.AddScoped<DoacaoRealizadaEventHandler>();
+            services.AddScoped<DoacaoFinalizadaEventHandler>();
 
 
             // Email

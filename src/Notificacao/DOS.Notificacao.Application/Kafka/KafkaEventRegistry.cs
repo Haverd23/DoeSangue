@@ -16,6 +16,7 @@ namespace DOS.Notificacao.Application.Kafka
             Register<UsuarioCriadoEvent, UsuarioCriadoEventHandler>("UsuarioCriadoEvent");
             Register<DoacaoAgendadaEvent, DoacaoAgendadaEventHandler>("DoacaoAgendadaEvent");
             Register<DoacaoRealizadaEvent, DoacaoRealizadaEventHandler>("DoacaoRealizadaEvent");
+            Register<DoacaoFinalizadaEvent, DoacaoFinalizadaEventHandler>("DoacaoFinalizadaEvent");
         }
 
         private void Register<TEvent, THandler>(string topic)
