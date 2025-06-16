@@ -70,6 +70,23 @@ namespace DoacaoTests.Application
             // Assert
             Assert.Equal(StatusDoacao.Finalizada, doacao.Status);
         }
+        [Fact(DisplayName = "Cancelamento de doação em Agendada deve alterar status para Cancelada")]
+        public void Cancelar_QuandoDoacaoAgendada_DeveAlterarStatusParaCancelada()
+        {
+            // Arrange
+            var agendaId = Guid.NewGuid();
+            var usuarioId = Guid.NewGuid();
+            var tipoSanguineo = "AB-";
+            var dataAgendada = DateTime.Now.AddDays(1);
+            var doacao = new DoacaoRegistro(agendaId, usuarioId, tipoSanguineo, dataAgendada);
+          
+
+            // Act
+            doacao.Cancelar();
+
+            // Assert
+            Assert.Equal(StatusDoacao.Cancelada, doacao.Status);
+        }
         [Fact(DisplayName = "Marcar doação em andamento como falha deve alterar status para Falha")]
         public void MarcarComoFalha_QuandoDoacaoEmAndamento_DeveAlterarStatusParaFalha()
         {

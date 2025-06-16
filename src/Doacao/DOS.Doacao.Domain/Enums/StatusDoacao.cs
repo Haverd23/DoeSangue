@@ -11,6 +11,7 @@ namespace DOS.Doacao.Domain.Enums
         Agendada,
         EmAndamento,
         Finalizada,
-        Falha
+        Falha,
+        Cancelada
     }
 }
