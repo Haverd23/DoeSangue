@@ -31,6 +31,13 @@ namespace DOS.Doacao.Domain
 
             Status = StatusDoacao.EmAndamento;
         }
+        public void Cancelar()
+        {
+            if (Status != StatusDoacao.Agendada)
+                throw new Exception("A doação só pode ser cancelada se estiver agendada.");
+
+            Status = StatusDoacao.Cancelada;
+        }
 
         public void Finalizar()
         {
