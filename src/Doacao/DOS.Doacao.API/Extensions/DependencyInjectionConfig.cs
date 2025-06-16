@@ -24,6 +24,7 @@ namespace DOS.Doacao.API.Extensions
             services.AddScoped<ICommandHandler<DoacaoRealizadaCommand,bool>, DoacaoRealizadaCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoFinalizadaCommand, bool>, DoacaoFinalizadaCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoFalhaCommand, bool>, DoacaoFalhaCommandHandler>();
+            services.AddScoped<ICommandHandler<DoacaoCanceladaCommand, bool>, DoacaoCanceladaCommandHandler>();
 
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();

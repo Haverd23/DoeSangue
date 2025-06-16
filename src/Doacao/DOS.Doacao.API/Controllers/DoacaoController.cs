@@ -33,6 +33,13 @@ namespace DOS.Doacao.API.Controllers
             var doacaoId = await _commandDispatcher.DispatchAsync<AgendarDoacaoCommand, Guid>(command);
             return CreatedAtAction(nameof(Agendar), new { id = doacaoId }, doacaoId);
         }
+        [HttpPost("cancelar")]
+        public async Task<IActionResult> Cancelar([FromBody] DoacaoCanceladaDTO request)
+        {
+            var command = new DoacaoCanceladaCommand(request.DoacaoId);
+            var doacaoId = await _commandDispatcher.DispatchAsync<DoacaoCanceladaCommand,bool>(command);
+            return NoContent();
+        }
 
         [Authorize(Roles = "Administrador")]
         [HttpPost("iniciar")]
