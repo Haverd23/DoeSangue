@@ -19,6 +19,7 @@ namespace DOS.Agenda.API.Extensions
 
             services.AddHostedService<KafkaConsumerService>();
             services.AddScoped<DoacaoCanceladaEventHandler>();
+            services.AddScoped<DoacaoAgendadaEventHandler>();
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 

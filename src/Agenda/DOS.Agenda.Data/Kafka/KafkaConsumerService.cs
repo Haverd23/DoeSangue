@@ -15,7 +15,8 @@ namespace DOS.Agenda.Data.Kafka
 
         private readonly string[] _topics = new[]
         {
-            "DoacaoCanceladaEvent"
+            "DoacaoCanceladaEvent",
+            "DoacaoAgendadaEvent"
             
         };
 
@@ -65,7 +66,16 @@ namespace DOS.Agenda.Data.Kafka
                             await canceladaHandler.HandleAsync(canceladaEvent);
                             break;
 
-                     
+                        case "DoacaoAgendadaEvent":
+                            var agendadaEvent = new DoacaoAgendadaEvent
+                            {
+                                AgendaId = agendaId
+                            };
+                            var agendadaHandler = scope.ServiceProvider.GetRequiredService<DoacaoAgendadaEventHandler>();
+                            await agendadaHandler.HandleAsync(agendadaEvent);
+                            break;
+
+
                     }
                 }
                 catch (Exception ex)
