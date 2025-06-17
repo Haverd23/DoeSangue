@@ -1,5 +1,6 @@
 ﻿using DOS.Core.DomainObjects;
 using DOS.Doacao.Domain.Enums;
+using DOS.Doacao.Domain.Events;
 
 namespace DOS.Doacao.Domain
 {
@@ -37,6 +38,7 @@ namespace DOS.Doacao.Domain
                 throw new Exception("A doação só pode ser cancelada se estiver agendada.");
 
             Status = StatusDoacao.Cancelada;
+            AddDomainEvent(new DoacaoCanceladaEvent(Id, AgendaId));
         }
 
         public void Finalizar()

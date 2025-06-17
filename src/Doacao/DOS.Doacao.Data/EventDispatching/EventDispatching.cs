@@ -26,6 +26,8 @@ namespace DOS.Doacao.Data.EventDispatching
                         WriteIndented = false
                     }
                     );
+                Console.WriteLine($"Evento serializado para Kafka no tópico {topic}: {json}");
+
                 await _kafkaProducer.PublishAsync(topic, Guid.NewGuid().ToString(), json);
             }
         }

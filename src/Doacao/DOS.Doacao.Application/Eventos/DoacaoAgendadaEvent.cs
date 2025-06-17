@@ -4,19 +4,22 @@ namespace DOS.Doacao.Application.Eventos
 {
     public class DoacaoAgendadaEvent : IDomainEvent
     {
-        public Guid Id { get; private set; }
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public Guid DoacaoId { get; private set; }
-        public DateTime DataHoraAgendada { get; private set; }
+        public Guid AgendaId { get;  set; }
+        public Guid Id { get;  set; }
+        public string Nome { get;  set; }
+        public string Email { get;  set; }
+        public Guid DoacaoId { get;  set; }
+        public DateTime DataHoraAgendada { get;  set; }
         public DateTime OcurreuEm => DateTime.UtcNow;
-        public DoacaoAgendadaEvent(string nome, string email, Guid doacaoId, DateTime dataHoraAgendada)
+        public DoacaoAgendadaEvent(string nome, string email,
+            Guid doacaoId, DateTime dataHoraAgendada, Guid agendaId)
         {
             Id = Guid.NewGuid();
             Nome = nome;
             Email = email;
             DoacaoId = doacaoId;
             DataHoraAgendada = dataHoraAgendada;
+            AgendaId = agendaId;
         }
     }
 }

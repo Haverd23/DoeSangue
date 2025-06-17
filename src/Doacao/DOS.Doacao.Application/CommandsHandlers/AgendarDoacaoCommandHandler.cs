@@ -49,7 +49,8 @@ namespace DOS.Doacao.Application.CommandsHandlers
                         usuario.Nome,
                         usuario.Email,
                         doacao.Id,
-                        doacao.DataHoraAgendada
+                        doacao.DataHoraAgendada,
+                        command.AgendaId
                     )
                   }
         );

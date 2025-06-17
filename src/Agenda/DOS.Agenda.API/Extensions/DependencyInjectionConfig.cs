@@ -1,6 +1,8 @@
 ﻿using DOS.Agenda.Application.Commands;
 using DOS.Agenda.Application.CommandsHandlers;
+using DOS.Agenda.Application.Kafka.EventosHandlers;
 using DOS.Agenda.Data;
+using DOS.Agenda.Data.Kafka;
 using DOS.Agenda.Data.Mediator;
 using DOS.Agenda.Domain;
 using DOS.Core.Mediator.Commands;
@@ -13,6 +15,10 @@ namespace DOS.Agenda.API.Extensions
         {
             services.AddScoped<IHorarioRepository, HorarioRepository>();
             services.AddScoped<ICommandHandler<AgendaCriadaCommand, Guid>, AgendaCriadaCommandHandler>();
+
+
+            services.AddHostedService<KafkaConsumerService>();
+            services.AddScoped<DoacaoCanceladaEventHandler>();
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
