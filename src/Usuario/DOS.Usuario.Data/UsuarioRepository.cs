@@ -1,5 +1,6 @@
 ﻿using DOS.Core.Data;
 using DOS.Usuario.Domain;
+using DOS.Usuario.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 namespace DOS.Usuario.Data
 {
@@ -17,9 +18,9 @@ namespace DOS.Usuario.Data
         {
             await _context.Usuarios.AddAsync(usuario);
         }
-        public async Task<User> GetByEmail(string email)
+        public async Task<User> GetByCPF(CPF cpf)
         {
-           return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+           return await _context.Usuarios.FirstOrDefaultAsync(u => u.CPF.Numero == cpf.Numero);
         }
 
         public Task<User> GetById(Guid id)
