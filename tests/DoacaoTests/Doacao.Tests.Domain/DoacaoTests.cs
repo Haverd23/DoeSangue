@@ -104,24 +104,5 @@ namespace DoacaoTests.Application
             // Assert
             Assert.Equal(StatusDoacao.Falha, doacao.Status);
         }
-        [Fact(DisplayName = "Atribuir tipo sanguíneo deve atualizar o campo corretamente")]
-        public void AtribuirTipoSanguineo_QuandoTipoValido_DeveAtualizarCampo()
-        {
-            // Arrange
-            var agendaId = Guid.NewGuid();
-            var usuarioId = Guid.NewGuid();
-            var tipoSanguineo = "AB-";
-            var dataAgendada = DateTime.Now.AddDays(1);
-            var doacao = new DoacaoRegistro(agendaId, usuarioId, tipoSanguineo, dataAgendada);
-
-            // Act
-            doacao.AtribuirTipoSanguineo("O+");
-            // Assert
-            Assert.Equal("O+", doacao.TipoSanguineo);
-        }
-
-
-
-
     }
 }

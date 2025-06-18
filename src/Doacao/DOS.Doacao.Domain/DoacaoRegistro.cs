@@ -59,15 +59,6 @@ namespace DOS.Doacao.Domain
 
             Status = StatusDoacao.Falha;
         }
-
-        public void AtribuirTipoSanguineo(string tipoSanguineo)
-        {
-            if (string.IsNullOrWhiteSpace(tipoSanguineo))
-                throw new Exception("Tipo sanguíneo inválido.");
-
-            TipoSanguineo = tipoSanguineo;
-        }
-
         private void Validar()
         {
             if (DataHoraAgendada <= DateTime.Now)
