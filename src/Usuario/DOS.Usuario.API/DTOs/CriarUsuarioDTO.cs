@@ -7,6 +7,6 @@ namespace DOS.Usuario.API.DTOs
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string Telefone { get; set; }
-        public TipoSanguineo TipoSanguineo { get; set; }
+        public string TipoSanguineo { get; set; }
     }
 }
