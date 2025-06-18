@@ -10,10 +10,10 @@ namespace DOS.Usuario.Application.Commands
         public string CPF { get; private set; }
         public string Telefone { get; private set; }
         public string Email { get; private set; }
-        public TipoSanguineo TipoSanguineo { get; private set; }
+        public string TipoSanguineo { get; private set; }
 
         public UsuarioCriadoCommand(string nome,
-            string cpf, string telefone, TipoSanguineo tipoSanguineo)
+            string cpf, string telefone, string tipoSanguineo)
         {
             Nome = nome;
             CPF = cpf;

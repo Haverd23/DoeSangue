@@ -13,13 +13,10 @@ namespace DOS.Usuario.API.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioRepository _usuarioRepository;
         private readonly ICommandDispatcher _commandDispatcher;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository,
-            ICommandDispatcher commandDispatcher)
+        public UsuarioController(ICommandDispatcher commandDispatcher)
         {
-            _usuarioRepository = usuarioRepository;
             _commandDispatcher = commandDispatcher;
         }
 
