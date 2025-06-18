@@ -28,7 +28,7 @@ namespace UsuarioTests.Application
             var email = "email@gmail.com";
             var cpf = "12345678909";
             var telefone = "11987654321";
-            var tipoSanguineo = TipoSanguineo.ABNegativo;
+            var tipoSanguineo = "ONegativo";
 
             var command = new UsuarioCriadoCommand(nome,cpf, telefone, tipoSanguineo);
             var handler = new UsuarioCriadoCommandHandler(
