@@ -30,7 +30,7 @@ namespace DOS.Usuario.Domain
         {
             Telefone = new Telefone(telefone);
         }
-        public void AlterTipoSanguineo(TipoSanguineo tipoSanguineo)
+        public void AlterarTipoSanguineo(TipoSanguineo tipoSanguineo)
         {
             TipoSanguineo = tipoSanguineo;
         }
