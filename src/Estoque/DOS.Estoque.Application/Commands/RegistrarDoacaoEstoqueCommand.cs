@@ -1,5 +1,5 @@
-﻿using DOS.Core.Mediator.Commands;
-using DOS.Estoque.Domain.Enums;
+﻿using DOS.Core.Enums;
+using DOS.Core.Mediator.Commands;
 namespace DOS.Estoque.Application.Commands
 {
     public class RegistrarDoacaoEstoqueCommand : ICommand<bool>

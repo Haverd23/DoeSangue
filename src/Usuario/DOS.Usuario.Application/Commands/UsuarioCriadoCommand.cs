@@ -1,5 +1,4 @@
 ﻿using DOS.Core.Mediator.Commands;
-using DOS.Usuario.Domain.Enums;
 
 namespace DOS.Usuario.Application.Commands
 {

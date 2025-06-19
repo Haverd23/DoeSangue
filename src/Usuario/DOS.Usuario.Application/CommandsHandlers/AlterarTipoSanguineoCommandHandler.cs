@@ -1,7 +1,7 @@
-﻿using DOS.Core.Mediator.Commands;
+﻿using DOS.Core.Enums;
+using DOS.Core.Mediator.Commands;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Domain;
-using DOS.Usuario.Domain.Enums;
 using DOS.Usuario.Domain.ValueObjects;
 namespace DOS.Usuario.Application.CommandsHandlers
 {

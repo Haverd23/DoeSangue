@@ -1,8 +1,8 @@
 ﻿using DOS.Core.DomainObjects;
+using DOS.Core.Enums;
 using DOS.Core.Mediator.Commands;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Domain;
-using DOS.Usuario.Domain.Enums;
 
 namespace DOS.Usuario.Application.CommandsHandlers
 {

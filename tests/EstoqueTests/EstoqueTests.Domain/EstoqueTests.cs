@@ -1,5 +1,5 @@
-﻿using DOS.Estoque.Domain;
-using DOS.Estoque.Domain.Enums;
+﻿using DOS.Core.Enums;
+using DOS.Estoque.Domain;
 using System.ComponentModel;
 
 namespace EstoqueTests.Domain

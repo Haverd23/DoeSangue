@@ -1,5 +1,5 @@
-﻿using DOS.Usuario.Domain;
-using DOS.Usuario.Domain.Enums;
+﻿using DOS.Core.Enums;
+using DOS.Usuario.Domain;
 
 namespace UsuarioTests.Domain
 {
