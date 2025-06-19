@@ -19,6 +19,12 @@ namespace DOS.Agenda.Domain
             Validar();
 
         }
+        public void AlterarQuantidadeVagas(int vagas)
+        {
+            if (vagas < 0)
+                throw new Exception("Quantidade de vagas deve ser maior que 0");
+            VagasTotais = vagas;
+        }
         public void AlterarDataHora(DateTime dataHora)
         {
             if (dataHora < DateTime.UtcNow)
