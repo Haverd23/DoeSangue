@@ -40,7 +40,20 @@ namespace DOS.Agenda.API.Controllers
                 return BadRequest("Informe a agenda que será apagada");
             }
             var command = new DeletarAgendaCommand(dto.AgendaId);
-            var agendaId =  await _commandDispatcher.DispatchAsync<DeletarAgendaCommand,bool>(command);
+            var agendaId =  await _commandDispatcher.DispatchAsync<DeletarAgendaCommand,
+                bool>(command);
+            return NoContent();
+        }
+        [HttpPut]
+        public async Task<IActionResult> AtualizarHorario([FromBody] AlterarHorarioDTO dto)
+        {
+            if (dto == null)
+            {
+                return BadRequest("Informe a agenda que será apagada");
+            }
+            var command = new AtualizarDataHoraCommand(dto.AgendaId, dto.Horario);
+            var horarioId = await _commandDispatcher.DispatchAsync<AtualizarDataHoraCommand,
+                bool>(command);
             return NoContent();
         }
     }

@@ -16,6 +16,7 @@ namespace DOS.Agenda.API.Extensions
             services.AddScoped<IHorarioRepository, HorarioRepository>();
             services.AddScoped<ICommandHandler<AgendaCriadaCommand, Guid>, AgendaCriadaCommandHandler>();
             services.AddScoped<ICommandHandler<DeletarAgendaCommand, bool>, DeletarAgendaCommandHandler>();
+            services.AddScoped<ICommandHandler<AtualizarDataHoraCommand,bool>, AtualizarDataHoraCommandHandler>();
 
 
             services.AddHostedService<KafkaConsumerService>();
