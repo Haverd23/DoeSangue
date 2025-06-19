@@ -19,6 +19,12 @@ namespace DOS.Agenda.Domain
             Validar();
 
         }
+        public void AlterarDataHora(DateTime dataHora)
+        {
+            if (dataHora < DateTime.UtcNow)
+                throw new ArgumentException("A data e hora do horário não podem ser no passado.");
+            DataHora = dataHora;
+        }
         public bool TemVagasDisponiveis()
         {
             return VagasOcupadas < VagasTotais;
