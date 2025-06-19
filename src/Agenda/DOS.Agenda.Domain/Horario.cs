@@ -21,14 +21,14 @@ namespace DOS.Agenda.Domain
         }
         public void AlterarQuantidadeVagas(int vagas)
         {
-            if (vagas < 0)
+            if (vagas <= 0)
                 throw new Exception("Quantidade de vagas deve ser maior que 0");
             VagasTotais = vagas;
         }
         public void AlterarDataHora(DateTime dataHora)
         {
             if (dataHora < DateTime.UtcNow)
-                throw new ArgumentException("A data e hora do horário não podem ser no passado.");
+                throw new Exception("A data e hora do horário não podem ser no passado.");
             DataHora = dataHora;
         }
         public bool TemVagasDisponiveis()

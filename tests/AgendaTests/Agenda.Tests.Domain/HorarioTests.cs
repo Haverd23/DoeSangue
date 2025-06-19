@@ -128,6 +128,63 @@ namespace Agenda.Tests.Domain
             // Assert
             Assert.False(resultado);
         }
+        [Fact(DisplayName = "Alterar quantidade de vagas disponíveis deve atualizar a quantidade de vagas")]
+        public void AlterarQuantidadeVagas_QuandoQuantidadeValida_DeveAtualizarNumeroDeVaga()
+        {
+            // Arrange
+            DateTime datahora = DateTime.UtcNow.AddDays(1);
+            var vasgasTotais = 1;
+            var horario = new Horario(datahora, vasgasTotais);
+            var vagasAtualizadas = 10;
 
+            // Act
+            horario.AlterarQuantidadeVagas(vagasAtualizadas);
+
+            // Assert
+            Assert.Equal(vagasAtualizadas, horario.VagasTotais);
+        }
+        [Fact(DisplayName = "Alterar vagas disponíveis com valor inválido deve lançar exceção")]
+        public void AlterarQuantidadeVagas_QuandoQuandidadeInvalida_DeveLancarExcecao()
+        {
+            // Arrange
+            DateTime datahora = DateTime.UtcNow.AddDays(1);
+            var vasgasTotais = 1;
+            var horario = new Horario(datahora, vasgasTotais);
+            var vagasAtualizadas = 0;
+
+            // Act & Assert
+            var ex = Assert.Throws<Exception>( () => horario.AlterarQuantidadeVagas(vagasAtualizadas));
+            Assert.Equal("Quantidade de vagas deve ser maior que 0", ex.Message);
+        }
+        [Fact(DisplayName = "Alterar horário válido com data e hora válidos")]
+        public void AlterarDataHora_QuandoHorarioValido_DeveAtualizarHorario()
+        {
+            // Arrange
+            DateTime datahora = DateTime.UtcNow.AddDays(1);
+            var vasgasTotais = 1;
+            var horario = new Horario(datahora, vasgasTotais);
+            var horarioAtualizado = DateTime.UtcNow.AddDays(2);
+
+            // Act
+            horario.AlterarDataHora(horarioAtualizado);
+
+            // Assert
+            Assert.Equal(horarioAtualizado, horario.DataHora);
+
+        }
+        [Fact(DisplayName = "Alterar horário com data e hora inválidos")]
+        public void AlterarDataHora_QuandoHorarioInvalido_DeveLancarExececao()
+        {
+            // Arrange
+            DateTime datahora = DateTime.UtcNow.AddDays(1);
+            var vasgasTotais = 1;
+            var horario = new Horario(datahora, vasgasTotais);
+            var horarioAtualizado = DateTime.UtcNow.AddDays(-2);
+
+            // Act & Assert
+            var ex = Assert.Throws<Exception>(() => horario.AlterarDataHora(horarioAtualizado));
+            Assert.Equal("A data e hora do horário não podem ser no passado.", ex.Message);
+
+        }
     }
 }
