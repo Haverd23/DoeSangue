@@ -42,6 +42,14 @@ namespace DOS.Agenda.Data
             return await _context.Horarios
                 .Where(h => h.VagasOcupadas < h.VagasTotais).ToListAsync();
         }
+
+        public async Task Deletar(Guid id)
+        {
+            var agenda = await ObterPorIdAsync(id);
+            if (agenda == null)
+                throw new Exception("Agenda não encontrada");
+            _context.Remove(agenda);
+        }
         public void Dispose()
         {
             _context?.Dispose();

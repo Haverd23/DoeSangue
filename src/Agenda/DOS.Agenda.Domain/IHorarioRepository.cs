@@ -9,5 +9,6 @@ namespace DOS.Agenda.Domain
         Task<IEnumerable<Horario>> ObterPorDataAsync(DateTime data);
         Task Adicionar(Horario horario);
         Task Atualizar(Horario horario);
+        Task Deletar(Guid Id);
     }
 }
