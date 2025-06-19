@@ -1,7 +1,7 @@
-﻿using DOS.Estoque.Application.Commands;
+﻿using DOS.Core.Enums;
+using DOS.Estoque.Application.Commands;
 using DOS.Estoque.Application.CommandsHandlers;
 using DOS.Estoque.Domain;
-using DOS.Estoque.Domain.Enums;
 using Moq;
 
 namespace EstoqueTests.Application

@@ -1,4 +1,4 @@
-﻿namespace DOS.Estoque.Domain.Enums
+﻿namespace DOS.Core.Enums
 {
     public enum TipoSanguineo
     {
@@ -12,4 +12,3 @@
         ONegativo
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿using DOS.Core.Data;
-using DOS.Estoque.Domain.Enums;
+using DOS.Core.Enums;
 
 namespace DOS.Estoque.Domain
 {

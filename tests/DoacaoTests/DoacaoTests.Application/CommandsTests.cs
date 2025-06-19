@@ -1,9 +1,9 @@
 ﻿using DOS.Core.DomainObjects;
+using DOS.Core.Enums;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.CommandsHandlers;
 using DOS.Doacao.Domain;
 using DOS.Usuario.Domain;
-using DOS.Usuario.Domain.Enums;
 using Moq;
 
 namespace DoacaoTests.Application

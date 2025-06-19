@@ -1,9 +1,7 @@
-﻿using DOS.Core.Data;
-using DOS.Core.DomainObjects;
+﻿using DOS.Core.DomainObjects;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Application.CommandsHandlers;
 using DOS.Usuario.Domain;
-using DOS.Usuario.Domain.Enums;
 using Moq;
 
 namespace UsuarioTests.Application
