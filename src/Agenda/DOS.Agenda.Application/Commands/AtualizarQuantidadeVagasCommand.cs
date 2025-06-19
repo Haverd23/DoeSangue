@@ -6,5 +6,11 @@ namespace DOS.Agenda.Application.Commands
     {
         public Guid AgendaId { get; set; }
         public int Quantidade { get; set; }
+
+        public AtualizarQuantidadeVagasCommand(Guid agendaId, int quantidade)
+        {
+            AgendaId = agendaId;
+            Quantidade = quantidade;
+        }
     }
 }

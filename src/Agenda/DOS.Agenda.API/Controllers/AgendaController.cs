@@ -44,7 +44,7 @@ namespace DOS.Agenda.API.Controllers
                 bool>(command);
             return NoContent();
         }
-        [HttpPut]
+        [HttpPut("atualizar/horario")]
         public async Task<IActionResult> AtualizarHorario([FromBody] AlterarHorarioDTO dto)
         {
             if (dto == null)
@@ -53,6 +53,19 @@ namespace DOS.Agenda.API.Controllers
             }
             var command = new AtualizarDataHoraCommand(dto.AgendaId, dto.Horario);
             var horarioId = await _commandDispatcher.DispatchAsync<AtualizarDataHoraCommand,
+                bool>(command);
+            return NoContent();
+        }
+        [HttpPut("atualizar/quantidade/vagas")]
+        public async Task<IActionResult> AtualizarQuantidadeVagas([FromBody]
+        AlterarQuantidadeVagasDTO dto)
+        {
+            if (dto == null)
+            {
+                return BadRequest("Informe a agenda que será atualizada");
+            }
+            var command = new AtualizarQuantidadeVagasCommand(dto.AgendaId,dto.Quantidade);
+            var agendaId = await _commandDispatcher.DispatchAsync<AtualizarQuantidadeVagasCommand,
                 bool>(command);
             return NoContent();
         }
