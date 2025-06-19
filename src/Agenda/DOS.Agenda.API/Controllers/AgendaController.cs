@@ -32,5 +32,16 @@ namespace DOS.Agenda.API.Controllers
             var horarioId = await _commandDispatcher.DispatchAsync<AgendaCriadaCommand, Guid>(command);
             return CreatedAtAction(nameof(CriarHorario), new { id = horarioId }, horarioId);
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeletarHorario([FromBody] ApagarHorarioDTO dto)
+        {
+            if(dto == null)
+            {
+                return BadRequest("Informe a agenda que será apagada");
+            }
+            var command = new DeletarAgendaCommand(dto.AgendaId);
+            var agendaId =  await _commandDispatcher.DispatchAsync<DeletarAgendaCommand,bool>(command);
+            return NoContent();
+        }
     }
 }
