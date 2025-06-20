@@ -45,7 +45,7 @@ namespace Auth.Tests.Domain
             Assert.Equal("Senha inválida", ex.Message);
         }
         [Fact(DisplayName = "Criar user com senha menor que 6 caracteres deve lançar exceção")]
-        public void Constrator_QuandoSenhaMenorQue6Caracteres_DeveLancarExcecao()
+        public void Construtor_QuandoSenhaMenorQue6Caracteres_DeveLancarExcecao()
         {
             // Arrange
             var email = new Email("teste123@gmail.com");
