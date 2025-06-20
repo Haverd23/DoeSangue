@@ -23,6 +23,8 @@ namespace DOS.Auth.API.Extensions
             services.AddScoped<IDomainEventDispatcher, UserCriadoEventDispatching>();
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<ICommandHandler<UsuarioCriadoCommand, Guid>, UsuarioCriadoCommandHandler>();
+            services.AddScoped<ICommandHandler<EsqueciASenhaCommand, bool>, EsqueciASenhaCommandHandler>();
+            services.AddScoped<ICommandHandler<ResetarSenhaCommand, bool>, ResetarSenhaCommandHandler>();
 
             var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<UserContext>(options =>

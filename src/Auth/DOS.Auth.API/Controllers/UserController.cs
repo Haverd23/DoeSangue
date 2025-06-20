@@ -39,7 +39,39 @@ namespace DOS.Auth.API.Controllers
             var token = await _loginService.Autenticar(email, request.Senha);
             return Ok(token);
         }
-    }
+        [HttpPost("esqueci-senha")]
+        public async Task<IActionResult> EsqueciMinhaSenha([FromBody] EsqueciSenhaDTO request)
+        {
+            if (string.IsNullOrEmpty(request.Email))
+                return BadRequest("O e-mail é obrigatório.");
 
+            var command = new EsqueciASenhaCommand(request.Email);
+
+            var result = await _commandDispatcher.DispatchAsync<EsqueciASenhaCommand, bool>(command);
+
+            return NoContent();
+        }
+        [HttpPost("resetar-senha")]
+        public async Task<IActionResult> ResetarSenha([FromBody] ResetarSenhaDTO request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var command = new ResetarSenhaCommand(
+                request.Email,
+                request.Token,
+                request.NovaSenha
+            );
+
+            var resultado = await _commandDispatcher.DispatchAsync<ResetarSenhaCommand, bool>(command);
+
+            if (resultado)
+                return Ok(new { message = "Senha alterada com sucesso." });
+
+            return BadRequest(new { message = "Não foi possível alterar a senha." });
+        }
+    }
 }
+
+
 
