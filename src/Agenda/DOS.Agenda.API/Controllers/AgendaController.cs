@@ -1,24 +1,25 @@
 ﻿using DOS.Agenda.API.DTOs;
 using DOS.Agenda.Application.Commands;
-using DOS.Agenda.Domain;
+using DOS.Agenda.Application.DTOs;
+using DOS.Agenda.Application.Queries;
 using DOS.Core.Mediator.Commands;
-using Microsoft.AspNetCore.Authorization;
+using DOS.Core.Mediator.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DOS.Agenda.API.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class AgendaController : ControllerBase
     {
-        private readonly IHorarioRepository _horarioRepository;
         private readonly ICommandDispatcher _commandDispatcher;
-        public AgendaController(IHorarioRepository horarioRepository,
-            ICommandDispatcher commandDispatcher)
+        private readonly IQueryDispatcher _queryDispatcher;
+
+        public AgendaController(ICommandDispatcher commandDispatcher,
+            IQueryDispatcher queryDispatcher)
         {
-            _horarioRepository = horarioRepository;
             _commandDispatcher = commandDispatcher;
+            _queryDispatcher = queryDispatcher;
         }
 
         [HttpPost]
@@ -69,5 +70,15 @@ namespace DOS.Agenda.API.Controllers
                 bool>(command);
             return NoContent();
         }
+        [HttpGet("horarios")]
+        public async Task<IActionResult> ListarHorarios()
+        {
+            var query = new ListarHorariosQuery();
+
+            var horarios = await _queryDispatcher.DispatchAsync<ListarHorariosQuery, IEnumerable<AgendaDTO>>(query);
+
+            return Ok(horarios);
+        }
     }
 }
+
