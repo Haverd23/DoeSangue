@@ -18,12 +18,6 @@ namespace DOS.Agenda.Data
         {
             await _context.Horarios.AddAsync(horario);
         }
-
-        public Task Atualizar(Horario horario)
-        {
-            _context.Horarios.Update(horario);
-            return Task.CompletedTask;
-        }
         public async Task<IEnumerable<Horario>> ObterPorDataAsync(DateTime data)
         {
             return await _context.Horarios
