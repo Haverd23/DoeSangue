@@ -54,5 +54,12 @@ namespace DOS.Usuario.API.Controllers
             return NoContent();
 
         }
+        [HttpPut("alterar/tiposanguineo")]
+        public async Task<IActionResult> AlterarTipoSanguineo([FromBody] AlterarTipoSanguineoDTO dto)
+        {
+            var command = new AlterarTipoSanguineoCommand(dto.CPF, dto.TipoSanguineo);
+            var commandDispatcher = await _commandDispatcher.DispatchAsync<AlterarTipoSanguineoCommand, bool>(command);
+            return NoContent();
+        }
     }
 }

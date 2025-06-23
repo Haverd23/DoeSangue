@@ -19,6 +19,7 @@ namespace DOS.Usuario.API.Extensions
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICommandHandler<UsuarioCriadoCommand, Guid>, UsuarioCriadoCommandHandler>();
             services.AddScoped<ICommandHandler<AlterarTelefoneCommand,bool>, AlterarTelefoneCommandHandler>();
+            services.AddScoped<ICommandHandler<AlterarTipoSanguineoCommand,bool>, AlterarTipoSanguineoCommandHandler>();
 
             services.AddScoped<IDomainEventDispatcher, EventDispatching>();
             services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer("localhost:9092"));
