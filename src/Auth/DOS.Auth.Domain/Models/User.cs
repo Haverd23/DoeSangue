@@ -23,12 +23,11 @@ namespace DOS.Auth.Domain.Models
             Senha = novaSenha;
             AddDomainEvent(new SenhaAlteradaEvento(Id,Email));
         }
-        public void AlterarEmail(Email novoEmail)
+        public void AlterarEmail(string novoEmail)
         {
             if (novoEmail == null)
                 throw new ArgumentException("Email inválido");
-            if (novoEmail.Entrada == Email.Entrada) return;
-            Email = novoEmail;
+            Email = new Email(novoEmail);
             AddDomainEvent(new EmailAlteradoEvento(Id, Email));
         }
         public static void SenhaValida(string senha)
