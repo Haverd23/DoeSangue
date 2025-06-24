@@ -4,10 +4,10 @@ namespace DOS.Auth.Application.Commands
 {
     public class UsuarioCriadoCommand : ICommand<Guid>
     {
-        public Email Email { get; private set; }
+        public string Email { get; private set; }
         public string Senha { get; private set; }
 
-        public UsuarioCriadoCommand(Email email, string senha)
+        public UsuarioCriadoCommand(string email, string senha)
         {
             Email = email;
             Senha = senha;

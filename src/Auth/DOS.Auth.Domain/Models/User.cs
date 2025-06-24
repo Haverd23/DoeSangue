@@ -8,10 +8,10 @@ namespace DOS.Auth.Domain.Models
         public string Senha { get; private set; }
         public string Role { get; private set; }
 
-        public User(Email email, string senha)
+        public User(string email, string senha)
         {
             SenhaValida(senha);
-            Email = email;
+            Email = new Email(email);
             Senha = senha;
             Role = "User;";
             AddDomainEvent(new UserCriadoEvento(Id, Email));
@@ -26,22 +26,22 @@ namespace DOS.Auth.Domain.Models
         public void AlterarEmail(string novoEmail)
         {
             if (novoEmail == null)
-                throw new ArgumentException("Email inválido");
+                throw new Exception("Email Inválido");
             Email = new Email(novoEmail);
             AddDomainEvent(new EmailAlteradoEvento(Id, Email));
         }
         public static void SenhaValida(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
-                throw new ArgumentException("Senha inválida");
+                throw new Exception("Senha inválida");
             if (senha.Length < 6)
-                throw new ArgumentException("Senha deve ter pelo menos 6 caracteres");
+                throw new Exception("Senha deve ter pelo menos 6 caracteres");
             if (!senha.Any(char.IsDigit))
-                throw new ArgumentException("Senha deve conter pelo menos um número");
+                throw new Exception("Senha deve conter pelo menos um número");
             if (!senha.Any(char.IsUpper))
-                throw new ArgumentException("Senha deve conter pelo menos uma letra maiúscula");
+                throw new Exception("Senha deve conter pelo menos uma letra maiúscula");
             if (!senha.Any(char.IsLower))
-                throw new ArgumentException("Senha deve conter pelo menos uma letra minúscula");
+                throw new Exception("Senha deve conter pelo menos uma letra minúscula");
         }      
     }
 }

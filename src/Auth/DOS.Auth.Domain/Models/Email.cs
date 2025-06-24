@@ -10,7 +10,7 @@ namespace DOS.Auth.Domain.Models
         public Email(string entrada)
         {
             if (!EhValido(entrada))
-                throw new ArgumentException("Email Inválido");
+                throw new Exception("Email Inválido");
 
             Entrada = entrada;
         }
