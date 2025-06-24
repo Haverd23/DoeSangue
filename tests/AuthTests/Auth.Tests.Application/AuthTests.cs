@@ -29,7 +29,7 @@ namespace Auth.Tests.Application
         public async Task HandleAsync_DeveCriarUsuarioERetornarId()
         {
             // Arrange
-            var command = new UsuarioCriadoCommand(new Email("teste123@gmail.com"), "Ssss33t");
+            var command = new UsuarioCriadoCommand("teste123@gmail.com", "Ssss33t");
             _mockSenha.Setup(s => s.SenhaHash(command.Senha)).Returns("546546546546D54fdsfds");
             var handler = new UsuarioCriadoCommandHandler(_mockUser.Object, _mockDispatcher.Object, _mockSenha.Object);
 
@@ -47,7 +47,7 @@ namespace Auth.Tests.Application
         public async Task Autenticar_DeveLogarEReceberToken()
         {
             // Arrange
-            var user = new User(new Email("teste123@gmail.com"), "Ssss33t");
+            var user = new User("teste123@gmail.com", "Ssss33t");
             _mockUser.Setup(u => u.ObterPorEmail(user.Email)).ReturnsAsync(user);
             _mockSenha.Setup(s => s.VerificarSenha("Ssss33t", user.Senha)).Returns(true);
             var mockToken = new Mock<ITokenJWT>();
