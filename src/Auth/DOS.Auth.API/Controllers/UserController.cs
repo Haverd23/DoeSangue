@@ -53,6 +53,19 @@ namespace DOS.Auth.API.Controllers
             var commandDispatcher = await _commandDispatcher.DispatchAsync<AlterarSenhaCommand,bool>(command);
             return NoContent();
         }
+        [HttpPut("alterar/email")]
+        public async Task<IActionResult> AlterarEmail([FromBody] AlterarEmailDTO request)
+        {
+            var idString = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (!Guid.TryParse(idString, out Guid userId))
+            {
+                return Unauthorized("Id do usuário inválido no token.");
+            }
+            var command = new AlterarEmailCommand(userId, request.Email);
+            var commandDispatcher = await _commandDispatcher.DispatchAsync<AlterarEmailCommand, bool>(command);
+            return NoContent();
+        }
     }
 }
 
