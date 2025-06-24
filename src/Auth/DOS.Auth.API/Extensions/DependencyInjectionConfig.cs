@@ -24,6 +24,7 @@ namespace DOS.Auth.API.Extensions
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<ICommandHandler<UsuarioCriadoCommand, Guid>, UsuarioCriadoCommandHandler>();
             services.AddScoped<ICommandHandler<AlterarSenhaCommand,bool>, AlterarSenhaCommandHandler>();
+            services.AddScoped<ICommandHandler<AlterarEmailCommand,bool>, AlterarEmailCommandHandler>();
 
             var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<UserContext>(options =>
