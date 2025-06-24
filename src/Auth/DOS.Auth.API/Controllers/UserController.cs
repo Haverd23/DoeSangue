@@ -5,6 +5,7 @@ using DOS.Auth.Domain.Models;
 using DOS.Core.Mediator.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DOS.Auth.API.Controllers
 {
@@ -39,36 +40,18 @@ namespace DOS.Auth.API.Controllers
             var token = await _loginService.Autenticar(email, request.Senha);
             return Ok(token);
         }
-        [HttpPost("esqueci-senha")]
-        public async Task<IActionResult> EsqueciMinhaSenha([FromBody] EsqueciSenhaDTO request)
+        [HttpPut("alterar/senha")]
+        public async Task<IActionResult> AlterarSenha([FromBody] AlterarSenhaDTO request)
         {
-            if (string.IsNullOrEmpty(request.Email))
-                return BadRequest("O e-mail é obrigatório.");
+            var idString = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            var command = new EsqueciASenhaCommand(request.Email);
-
-            var result = await _commandDispatcher.DispatchAsync<EsqueciASenhaCommand, bool>(command);
-
+            if (!Guid.TryParse(idString, out Guid userId))
+            {
+                return Unauthorized("Id do usuário inválido no token.");
+            }
+            var command = new AlterarSenhaCommand(userId, request.Senha);
+            var commandDispatcher = await _commandDispatcher.DispatchAsync<AlterarSenhaCommand,bool>(command);
             return NoContent();
-        }
-        [HttpPost("resetar-senha")]
-        public async Task<IActionResult> ResetarSenha([FromBody] ResetarSenhaDTO request)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var command = new ResetarSenhaCommand(
-                request.Email,
-                request.Token,
-                request.NovaSenha
-            );
-
-            var resultado = await _commandDispatcher.DispatchAsync<ResetarSenhaCommand, bool>(command);
-
-            if (resultado)
-                return Ok(new { message = "Senha alterada com sucesso." });
-
-            return BadRequest(new { message = "Não foi possível alterar a senha." });
         }
     }
 }

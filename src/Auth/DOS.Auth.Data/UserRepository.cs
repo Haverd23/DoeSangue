@@ -19,6 +19,11 @@ namespace DOS.Auth.Data
         {
             await _context.Users.AddAsync(user);
         }
+        public async Task<User> ObterPorId(Guid id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<User> ObterPorEmail(Email email)
         {
            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
@@ -27,5 +32,7 @@ namespace DOS.Auth.Data
         {
             _context?.Dispose();
         }
+
+      
     }
 }
