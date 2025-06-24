@@ -8,5 +8,6 @@ namespace DOS.Auth.Domain.Interfaces
     {
         Task AdicionarUser(User user);
         Task<User> ObterPorEmail(Email email);
+        Task<User> ObterPorId(Guid id);
     }
 }

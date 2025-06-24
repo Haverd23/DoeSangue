@@ -44,59 +44,7 @@ namespace DOS.Auth.Application.Services
             return Task.FromResult(jwt);
         }
 
-        public Task<string> GerarTokenRecuperacaoSenhaAsync(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["AppSettings:SecretKey"]);
-
-            var claims = new[]
-            {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email.Entrada)
-            };
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(1), 
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var jwt = tokenHandler.WriteToken(token);
-
-            return Task.FromResult(jwt);
-        }
-        public bool ValidarTokenRecuperacaoSenha(string token, string email)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["AppSettings:SecretKey"]);
-
-            try
-            {
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-                var jwtToken = (JwtSecurityToken)validatedToken;
-
-                var emailDoToken = jwtToken.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
-
-                return emailDoToken != null && emailDoToken == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+      
 
     }
 }
