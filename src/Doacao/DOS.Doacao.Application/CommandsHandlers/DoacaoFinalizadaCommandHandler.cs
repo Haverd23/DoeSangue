@@ -38,14 +38,15 @@ namespace DOS.Doacao.Application.CommandsHandlers
             var usuario = await _usuarioRepository.GetById(doacao.UsuarioId);
             if (usuario == null)
                 throw new Exception("Usuário da doação não encontrado.");
-
+            var tipoSanguineo = usuario.TipoSanguineo.ToString();
             await _domainEventDispatcher.DispatchEventsAsync(
                 new List<IDomainEvent>
                 {
                   new DoacaoFinalizadaEvent(
                       doacao.Id,
                       usuario.Nome,
-                      usuario.Email
+                      usuario.Email,
+                      tipoSanguineo
                       )
                 });
             return true;
