@@ -25,8 +25,7 @@ namespace DOS.Auth.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarUsuario([FromBody] CriarUserDTO request)
         {
-            var email = new Email(request.Email);
-            var command = new UsuarioCriadoCommand(email, request.Senha);
+            var command = new UsuarioCriadoCommand(request.Email, request.Senha);
 
             var usuarioId = await _commandDispatcher
                 .DispatchAsync<UsuarioCriadoCommand, Guid>(command);
