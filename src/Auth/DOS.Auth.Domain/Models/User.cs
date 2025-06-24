@@ -16,6 +16,7 @@ namespace DOS.Auth.Domain.Models
             Role = "User;";
             AddDomainEvent(new UserCriadoEvento(Id, Email));
         }
+        protected User() { }
         public void AlterarSenha(string novaSenha)
         {
             SenhaValida(novaSenha);
