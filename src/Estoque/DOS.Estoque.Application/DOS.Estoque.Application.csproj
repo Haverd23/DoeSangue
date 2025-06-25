@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\DOS.Core\DOS.Core.csproj" />
     <ProjectReference Include="..\DOS.Estoque.Domain\DOS.Estoque.Domain.csproj" />
   </ItemGroup>
