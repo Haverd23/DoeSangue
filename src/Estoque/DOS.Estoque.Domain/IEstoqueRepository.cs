@@ -7,5 +7,6 @@ namespace DOS.Estoque.Domain
     {
         Task<EstoqueSanguineo?> ObterPorTipoAsync(TipoSanguineo tipo);
         void Adicionar(EstoqueSanguineo estoque);
+        Task<IEnumerable<EstoqueSanguineo>> ListarEstoque();
     }
 }

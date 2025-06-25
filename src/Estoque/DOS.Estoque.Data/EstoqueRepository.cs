@@ -24,6 +24,10 @@ namespace DOS.Estoque.Data
             return await _context.Estoque
                 .FirstOrDefaultAsync(e => e.Tipo == tipo);
         }
+        public async Task<IEnumerable<EstoqueSanguineo>> ListarEstoque()
+        {
+            return await _context.Estoque.ToListAsync();
+        }
         public void Dispose()
         {
             _context?.Dispose();
