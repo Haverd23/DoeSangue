@@ -1,7 +1,7 @@
 ﻿using DOS.Core.Mediator.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DOS.Agenda.Data.Mediator
+namespace DOS.Usuario.Data.Mediator
 {
     public class QueryDispatcher : IQueryDispatcher
     {
@@ -23,3 +23,4 @@ namespace DOS.Agenda.Data.Mediator
 
     }
 }
+
