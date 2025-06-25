@@ -1,4 +1,7 @@
-﻿using DOS.Core.Mediator.Queries;
+﻿using DOS.Core.Mediator.Commands;
+using DOS.Core.Mediator.Queries;
+using DOS.Estoque.Application.Commands;
+using DOS.Estoque.Application.CommandsHandlers;
 using DOS.Estoque.Application.DTOs;
 using DOS.Estoque.Application.Kafka.EventosHandlers;
 using DOS.Estoque.Application.Queries;
@@ -20,6 +23,8 @@ namespace DOS.Estoque.API.Extensions
 
             services.AddScoped<IQueryHandler<ListarEstoqueQuery, IEnumerable<EstoqueDTO>>, ListarEstoqueQueryHandler>();
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+            services.AddScoped<ICommandHandler<RetirarUnidadeSanguineaCommand, bool>, RetirarUnidadeSanguineaCommandHandler>();
+            services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
             services.AddHostedService<KafkaConsumerService>();
             services.AddScoped<DoacaoFinalizadaEventHandler>();
