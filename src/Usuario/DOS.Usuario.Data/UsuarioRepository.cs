@@ -20,7 +20,8 @@ namespace DOS.Usuario.Data
         }
         public async Task<User> GetByCPF(CPF cpf)
         {
-           return await _context.Usuarios.FirstOrDefaultAsync(u => u.CPF.Numero == cpf.Numero);
+            return await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.CPF == cpf);
         }
 
         public Task<User> GetById(Guid id)

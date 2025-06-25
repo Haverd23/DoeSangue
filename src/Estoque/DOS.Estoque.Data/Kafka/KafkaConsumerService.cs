@@ -31,7 +31,7 @@ namespace DOS.Estoque.Data.Kafka
             var config = new ConsumerConfig
             {
                 BootstrapServers = bootstrapServers,
-                GroupId = "agenda-consumer-group",
+                GroupId = "estoque-consumer-group",
                 AutoOffsetReset = AutoOffsetReset.Earliest,
                 EnableAutoCommit = true,
                 SocketTimeoutMs = 10000,
@@ -40,8 +40,6 @@ namespace DOS.Estoque.Data.Kafka
 
             using var consumer = new ConsumerBuilder<string, string>(config).Build();
             consumer.Subscribe(_topics);
-
-            Console.WriteLine("🚀 Kafka Consumer iniciado e ouvindo tópicos...");
 
             try
             {
@@ -57,19 +55,17 @@ namespace DOS.Estoque.Data.Kafka
                             continue;
                         }
 
-                        Console.WriteLine($"✅ Mensagem recebida do tópico {result.Topic}: {result.Message.Value}");
 
                         using var scope = _serviceProvider.CreateScope();
                         await ProcessMessageAsync(result.Topic, result.Message.Value, scope);
                     }
                     catch (ConsumeException ex)
                     {
-                        Console.WriteLine($"⚠️ Erro ao consumir mensagem do Kafka: {ex.Error.Reason}");
+                        Console.WriteLine($"Erro ao consumir mensagem do Kafka: {ex.Error.Reason}");
                         await Task.Delay(2000, stoppingToken);
                     }
                     catch (OperationCanceledException)
                     {
-                        Console.WriteLine("⛔ Cancelamento solicitado.");
                         break;
                     }
                     catch (Exception ex)
@@ -90,27 +86,38 @@ namespace DOS.Estoque.Data.Kafka
         {
             try
             {
-                var json = JsonDocument.Parse(message);
 
                 switch (topic)
                 {
-                    case "DoacaoFinalizadaEvent": 
-                        var finalizadaEvent = JsonSerializer.Deserialize<DoacaoFinalizadaEvent>(message);
+                    case "DoacaoFinalizadaEvent":
+                        var finalizadaEvent = JsonSerializer.Deserialize<DoacaoFinalizadaEvent>(
+                            message,
+                            new JsonSerializerOptions
+                            {
+                                PropertyNameCaseInsensitive = true
+                            });
+
+                        if (finalizadaEvent is null)
+                        {
+                            Console.WriteLine("❌ Erro: Evento deserializado como nulo.");
+                            return;
+                        }
+
+
                         var finalizadaHandler = scope.ServiceProvider.GetRequiredService<DoacaoFinalizadaEventHandler>();
                         await finalizadaHandler.HandleAsync(finalizadaEvent);
                         break;
 
-                   
-
                     default:
-                        Console.WriteLine($"⚠️ Tópico desconhecido: {topic}");
+                        Console.WriteLine($"Tópico desconhecido: {topic}");
                         break;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Erro no processamento da mensagem: {ex.Message}");
+                Console.WriteLine($" Erro no processamento da mensagem: {ex.Message}");
             }
         }
+
     }
 }
