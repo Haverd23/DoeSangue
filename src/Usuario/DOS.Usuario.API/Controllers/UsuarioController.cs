@@ -1,6 +1,9 @@
 ﻿using DOS.Core.Mediator.Commands;
+using DOS.Core.Mediator.Queries;
 using DOS.Usuario.API.DTOs;
 using DOS.Usuario.Application.Commands;
+using DOS.Usuario.Application.DTOs;
+using DOS.Usuario.Application.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -13,10 +16,13 @@ namespace DOS.Usuario.API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IQueryDispatcher _queryDispatcher;
 
-        public UsuarioController(ICommandDispatcher commandDispatcher)
+        public UsuarioController(ICommandDispatcher commandDispatcher,
+            IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
+            _queryDispatcher = queryDispatcher;
         }
 
         [HttpPost]
@@ -60,6 +66,20 @@ namespace DOS.Usuario.API.Controllers
             var command = new AlterarTipoSanguineoCommand(dto.CPF, dto.TipoSanguineo);
             var commandDispatcher = await _commandDispatcher.DispatchAsync<AlterarTipoSanguineoCommand, bool>(command);
             return NoContent();
+        }
+        [HttpGet("doacoes")]
+        public async Task<IActionResult> HistoricoDoacoes()
+        {
+            var idString = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!Guid.TryParse(idString, out Guid userId))
+            {
+                return Unauthorized("Id do usuário inválido no token.");
+            }
+            var query = new DoacaoHistoricoQuery(userId);
+            var queryDispatcher = await _queryDispatcher.DispatchAsync<DoacaoHistoricoQuery,
+                IEnumerable<HistoricoDoacaoDTO>>(query);
+
+            return Ok(query);
         }
     }
 }
