@@ -3,6 +3,7 @@ using DOS.Core.Mediator.Commands;
 using DOS.Core.Message;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.CommandsHandlers;
+using DOS.Doacao.Application.Services;
 using DOS.Doacao.Data;
 using DOS.Doacao.Data.EventDispatching;
 using DOS.Doacao.Data.Mediator;
@@ -29,6 +30,7 @@ namespace DOS.Doacao.API.Extensions
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             var kafkaBootstrapServers = configuration["Kafka:BootstrapServers"];
 
