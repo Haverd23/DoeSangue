@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using DOS.Core.Exceptions;
+using System.Text.RegularExpressions;
 namespace DOS.Usuario.Domain.ValueObjects
 {
     public class Telefone
@@ -13,7 +14,7 @@ namespace DOS.Usuario.Domain.ValueObjects
         private void EhValido(string numero)
         {
             if (string.IsNullOrWhiteSpace(numero))
-                throw new Exception("O número não pode ser vazio");
+                throw new DomainException("O número não pode ser vazio");
 
 
             string limpo = Regex.Replace(numero, @"[\s\-\.\(\)]", "");
@@ -22,7 +23,7 @@ namespace DOS.Usuario.Domain.ValueObjects
 
             if (!Regex.IsMatch(limpo, pattern))
             {
-                throw new Exception("Formato do número inválido");
+                throw new DomainException("Formato do número inválido");
 
             }
         }

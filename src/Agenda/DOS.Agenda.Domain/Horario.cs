@@ -1,4 +1,5 @@
 ﻿using DOS.Core.DomainObjects;
+using DOS.Core.Exceptions;
 
 namespace DOS.Agenda.Domain
 {
@@ -22,13 +23,13 @@ namespace DOS.Agenda.Domain
         public void AlterarQuantidadeVagas(int vagas)
         {
             if (vagas <= 0)
-                throw new Exception("Quantidade de vagas deve ser maior que 0");
+                throw new DomainException("Quantidade de vagas deve ser maior que 0");
             VagasTotais = vagas;
         }
         public void AlterarDataHora(DateTime dataHora)
         {
             if (dataHora < DateTime.UtcNow)
-                throw new Exception("A data e hora do horário não podem ser no passado.");
+                throw new DomainException("A data e hora do horário não podem ser no passado.");
             DataHora = dataHora;
         }
         public bool TemVagasDisponiveis()
@@ -38,21 +39,21 @@ namespace DOS.Agenda.Domain
         public void ReservarVaga()
         {
             if (!TemVagasDisponiveis())
-                throw new Exception("Não há vagas disponíveis para este horário.");
+                throw new DomainException("Não há vagas disponíveis para este horário.");
             VagasOcupadas++;
         }
         public void LiberarVaga()
         {
             if (VagasOcupadas <= 0)
-                throw new Exception("Não há vagas ocupadas para liberar.");
+                throw new DomainException("Não há vagas ocupadas para liberar.");
             VagasOcupadas--;
         }
         private void Validar()
         {
             if (VagasTotais <= 0)
-                throw new ArgumentException("O número total de vagas deve ser maior que zero.");
+                throw new DomainException("O número total de vagas deve ser maior que zero.");
             if (DataHora < DateTime.UtcNow)
-                throw new ArgumentException("A data e hora do horário não podem ser no passado.");
+                throw new DomainException("A data e hora do horário não podem ser no passado.");
         }
     }
 }

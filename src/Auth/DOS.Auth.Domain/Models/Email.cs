@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using DOS.Core.Exceptions;
+using System.Text.RegularExpressions;
 
 
 namespace DOS.Auth.Domain.Models
@@ -10,7 +11,7 @@ namespace DOS.Auth.Domain.Models
         public Email(string entrada)
         {
             if (!EhValido(entrada))
-                throw new Exception("Email Inválido");
+                throw new DomainException("Email Inválido");
 
             Entrada = entrada;
         }

@@ -1,4 +1,6 @@
-﻿namespace DOS.Usuario.Domain.ValueObjects
+﻿using DOS.Core.Exceptions;
+
+namespace DOS.Usuario.Domain.ValueObjects
 {
     public class CPF
     {
@@ -18,7 +20,7 @@
 
             if (valor.Length != 11)
             {
-                throw new Exception("O CPF deve possuir 11 dígitos");
+                throw new DomainException("O CPF deve possuir 11 dígitos");
             }
 
             int totalPenultimoDigito = 0;
@@ -40,7 +42,7 @@
 
             if (resto.ToString() != (valor[9].ToString()))
             {
-                throw new Exception("Primeiro dígito verificador incorreto");
+                throw new DomainException("Primeiro dígito verificador incorreto");
             }
 
             int totalUltimoDigito = 0;
@@ -62,7 +64,7 @@
 
             if (resto.ToString() != (valor[10].ToString()))
             {
-                throw new Exception("Segundo dígito verificador incorreto");
+                throw new DomainException("Segundo dígito verificador incorreto");
             }
         }
 
