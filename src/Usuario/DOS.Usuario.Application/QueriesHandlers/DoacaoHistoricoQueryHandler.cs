@@ -22,7 +22,7 @@ namespace DOS.Usuario.Application.QueriesHandlers
         public async Task<IEnumerable<HistoricoDoacaoDTO>> HandleAsync(DoacaoHistoricoQuery query)
         {
             var usuario = await _repository.GetById(query.UsuarioID);
-            if (usuario == null) throw new Exception("Usuário não encontrado");
+            if (usuario == null) throw new ApplicationException("Usuário não encontrado");
             var doacao = await _doacaoRepository.ObterPorUsuarioAsync(usuario.Id);
             return doacao.Select(d => new HistoricoDoacaoDTO
             {

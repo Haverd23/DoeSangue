@@ -42,7 +42,7 @@ namespace DOS.Notificacao.Application.Kafka
         public object? DeserializeEvent(string message, Type eventType)
         {
             if (string.IsNullOrWhiteSpace(message))
-                throw new ArgumentNullException(nameof(message), "Mensagem está vazia ou nula.");
+                throw new ApplicationException("Mensagem está vazia ou nula.");
 
             var options = new JsonSerializerOptions
             {

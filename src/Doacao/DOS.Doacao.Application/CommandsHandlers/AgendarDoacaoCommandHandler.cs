@@ -31,13 +31,13 @@ namespace DOS.Doacao.Application.CommandsHandlers
             d.Status == StatusDoacao.EmAndamento);
             if (possuiDoacaoEmAndamento)
             {
-                throw new Exception("Você já possui algum processo de doação em andamento.");
+                throw new ApplicationException("Você já possui algum processo de doação em andamento.");
             }
 
             var usuario = await _usuarioRepository.GetById(command.UserId);
             if (usuario == null)
             {
-                throw new Exception("Usuário não encontrado.");
+                throw new ApplicationException("Usuário não encontrado.");
             }
            
             string? tipoSanguineo = usuario?.TipoSanguineo?.ToString();
@@ -52,7 +52,7 @@ namespace DOS.Doacao.Application.CommandsHandlers
             var sucesso = await _doacaoRepository.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new Exception("Erro ao agendar a doação");
+                throw new ApplicationException("Erro ao agendar a doação");
             }
             await _domainEventDispatcher.DispatchEventsAsync(
                   new List<IDomainEvent>

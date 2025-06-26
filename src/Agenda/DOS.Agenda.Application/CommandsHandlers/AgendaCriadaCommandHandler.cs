@@ -19,7 +19,7 @@ namespace DOS.Agenda.Application.CommandsHandlers
             var sucesso = await _context.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new Exception("Erro ao salvar o horário");
+                throw new ApplicationException("Erro ao salvar o horário");
             }
             return horario.Id;
 

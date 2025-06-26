@@ -26,7 +26,7 @@ namespace DOS.Usuario.Application.CommandsHandlers
             var sucesso = await _usuarioRepository.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new Exception("Erro ao salvar o usuário");
+                throw new ApplicationException("Erro ao salvar o usuário");
             }
             await _domainEventDispatcher.DispatchEventsAsync(usuario.DomainEvents);
             return usuario.Id;

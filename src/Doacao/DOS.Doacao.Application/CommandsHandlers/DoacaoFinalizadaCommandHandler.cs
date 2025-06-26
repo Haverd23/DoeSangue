@@ -27,17 +27,17 @@ namespace DOS.Doacao.Application.CommandsHandlers
             var doacao = await _doacaoRepository.ObterPorIdAsync(command.DoacaoId);
             if (doacao == null)
             {
-                throw new Exception("Doação não encontrada");
+                throw new ApplicationException("Doação não encontrada");
             }
             doacao.Finalizar();
             var sucesso = await _doacaoRepository.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new Exception("Erro ao finalizar doação");
+                throw new ApplicationException("Erro ao finalizar doação");
             }
             var usuario = await _usuarioRepository.GetById(doacao.UsuarioId);
             if (usuario == null)
-                throw new Exception("Usuário da doação não encontrado.");
+                throw new ApplicationException("Usuário da doação não encontrado.");
             var tipoSanguineo = usuario.TipoSanguineo.ToString();
             await _domainEventDispatcher.DispatchEventsAsync(
                 new List<IDomainEvent>

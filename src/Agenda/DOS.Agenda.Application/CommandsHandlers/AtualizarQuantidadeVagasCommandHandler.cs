@@ -17,10 +17,10 @@ namespace DOS.Agenda.Application.CommandsHandlers
         public async Task<bool> HandleAsync(AtualizarQuantidadeVagasCommand command)
         {
             var agenda = await _repository.ObterPorIdAsync(command.AgendaId);
-            if (agenda == null) throw new Exception("Agenda não encontrada");
+            if (agenda == null) throw new ApplicationException("Agenda não encontrada");
             agenda.AlterarQuantidadeVagas(command.Quantidade);
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new Exception("Não foi possível atualizar a quantidade de vagas");
+            if (!sucesso) throw new ApplicationException("Não foi possível atualizar a quantidade de vagas");
             return true;
         }
     }
