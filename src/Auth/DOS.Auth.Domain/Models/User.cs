@@ -1,6 +1,6 @@
 ﻿using DOS.Auth.Domain.Events;
 using DOS.Core.DomainObjects;
-using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 namespace DOS.Auth.Domain.Models
 {
     public class User : Entity, IAggregateRoot
@@ -28,22 +28,28 @@ namespace DOS.Auth.Domain.Models
         public void AlterarEmail(string novoEmail)
         {
             if (novoEmail == null)
-                throw new DomainException("Email Inválido");
+                throw new AppException("Email Inválido",400);
             Email = new Email(novoEmail);
             AddDomainEvent(new EmailAlteradoEvento(Id, Email));
+        }
+        public void AlterarRole(string role)
+        {
+            if (role == null) throw new AppException("Role não pode ser vazia", 400);
+            if (role != "Administrador" && role != "User") throw new AppException("Role inválida",400);
+            Role = role;
         }
         public static void SenhaValida(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
-                throw new DomainException("Senha inválida");
+                throw new AppException("Senha inválida",400);
             if (senha.Length < 6)
-                throw new DomainException("Senha deve ter pelo menos 6 caracteres");
+                throw new AppException("Senha deve ter pelo menos 6 caracteres",400);
             if (!senha.Any(char.IsDigit))
-                throw new DomainException("Senha deve conter pelo menos um número");
+                throw new AppException("Senha deve conter pelo menos um número", 400);
             if (!senha.Any(char.IsUpper))
-                throw new DomainException("Senha deve conter pelo menos uma letra maiúscula");
+                throw new AppException("Senha deve conter pelo menos uma letra maiúscula", 400);
             if (!senha.Any(char.IsLower))
-                throw new DomainException("Senha deve conter pelo menos uma letra minúscula");
+                throw new AppException("Senha deve conter pelo menos uma letra minúscula", 400);
         }      
     }
 }
