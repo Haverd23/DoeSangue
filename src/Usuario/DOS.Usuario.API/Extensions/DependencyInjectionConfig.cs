@@ -9,6 +9,7 @@ using DOS.Usuario.Application.CommandsHandlers;
 using DOS.Usuario.Application.DTOs;
 using DOS.Usuario.Application.Queries;
 using DOS.Usuario.Application.QueriesHandlers;
+using DOS.Usuario.Application.Services;
 using DOS.Usuario.Data;
 using DOS.Usuario.Data.EventDispatching;
 using DOS.Usuario.Data.Mediator;
@@ -38,6 +39,7 @@ namespace DOS.Usuario.API.Extensions
 
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
+            services.AddScoped<IDoacaoService, DoacaoService>();
 
             var connectionString = configuration["DEFAULT_CONNECTION"];
             services.AddDbContext<UsuarioContext>(options =>
