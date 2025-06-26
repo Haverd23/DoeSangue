@@ -1,4 +1,5 @@
 ﻿using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Doacao.Domain;
 using DOS.Doacao.Domain.Enums;
 
@@ -35,7 +36,7 @@ namespace DoacaoTests.Application
             var dataAgendada = DateTime.Now.AddDays(-1);
 
             // Act & Assert
-            var ex = Assert.Throws<DomainException>(() => new DoacaoRegistro(agendaId, usuarioId, tipoSanguineo, dataAgendada));
+            var ex = Assert.Throws<AppException>(() => new DoacaoRegistro(agendaId, usuarioId, tipoSanguineo, dataAgendada));
             Assert.Equal("A data agendada deve ser futura.", ex.Message);
         }
         [Fact(DisplayName = "Iniciar doação agendada deve alterar status para EmAndamento")]

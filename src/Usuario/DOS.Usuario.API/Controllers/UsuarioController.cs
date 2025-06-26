@@ -79,7 +79,8 @@ namespace DOS.Usuario.API.Controllers
             var queryDispatcher = await _queryDispatcher.DispatchAsync<DoacaoHistoricoQuery,
                 IEnumerable<HistoricoDoacaoDTO>>(query);
 
-            return Ok(query);
+            return Ok(queryDispatcher);
+
         }
     }
 }

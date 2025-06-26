@@ -1,5 +1,7 @@
 ﻿using DOS.Agenda.Application.Commands;
 using DOS.Agenda.Domain;
+using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Commands;
 
 namespace DOS.Agenda.Application.CommandsHandlers
@@ -19,7 +21,7 @@ namespace DOS.Agenda.Application.CommandsHandlers
             var sucesso = await _context.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new ApplicationException("Erro ao salvar o horário");
+                throw new AppException("Erro ao salvar o horário", 500);
             }
             return horario.Id;
 

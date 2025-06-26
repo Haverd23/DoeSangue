@@ -1,5 +1,5 @@
 ﻿using DOS.Core.DomainObjects;
-using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Doacao.Domain.Enums;
 using DOS.Doacao.Domain.Events;
 
@@ -29,14 +29,14 @@ namespace DOS.Doacao.Domain
         public void Iniciar()
         {
             if (Status != StatusDoacao.Agendada)
-                throw new DomainException("A doação só pode ser iniciada se estiver agendada.");
+                throw new AppException("A doação só pode ser iniciada se estiver agendada",409);
 
             Status = StatusDoacao.EmAndamento;
         }
         public void Cancelar()
         {
             if (Status != StatusDoacao.Agendada)
-                throw new DomainException("A doação só pode ser cancelada se estiver agendada.");
+                throw new AppException("A doação só pode ser cancelada se estiver agendada",409);
 
             Status = StatusDoacao.Cancelada;
             AddDomainEvent(new DoacaoCanceladaEvent(Id, AgendaId));
@@ -45,10 +45,10 @@ namespace DOS.Doacao.Domain
         public void Finalizar()
         {
             if (Status != StatusDoacao.EmAndamento)
-                throw new DomainException("A doação só pode ser finalizada se estiver em andamento.");
+                throw new AppException("A doação só pode ser finalizada se estiver em andamento",409);
 
             if (string.IsNullOrWhiteSpace(TipoSanguineo))
-                throw new DomainException("Tipo sanguíneo deve ser informado para finalizar a doação.");
+                throw new AppException("Tipo sanguíneo deve ser informado para finalizar a doação",400);
 
             Status = StatusDoacao.Finalizada;
         }
@@ -56,14 +56,14 @@ namespace DOS.Doacao.Domain
         public void MarcarComoFalha()
         {
             if (Status != StatusDoacao.EmAndamento)
-                throw new DomainException("A doação só pode falhar se estiver em andamento.");
+                throw new AppException("A doação só pode falhar se estiver em andamento",409);
 
             Status = StatusDoacao.Falha;
         }
         private void Validar()
         {
             if (DataHoraAgendada <= DateTime.Now)
-                throw new DomainException("A data agendada deve ser futura.");
+                throw new AppException("A data agendada deve ser futura",400);
         }
     }
 }

@@ -2,6 +2,8 @@
 using DOS.Core.Mediator.Commands;
 using DOS.Core.Mediator.Queries;
 using DOS.Core.Message;
+using DOS.Doacao.Data;
+using DOS.Doacao.Domain;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Application.CommandsHandlers;
 using DOS.Usuario.Application.DTOs;
@@ -21,10 +23,12 @@ namespace DOS.Usuario.API.Extensions
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IDoacaoRepository, DoacaoRepository>();
+
             services.AddScoped<ICommandHandler<UsuarioCriadoCommand, Guid>, UsuarioCriadoCommandHandler>();
             services.AddScoped<ICommandHandler<AlterarTelefoneCommand,bool>, AlterarTelefoneCommandHandler>();
             services.AddScoped<ICommandHandler<AlterarTipoSanguineoCommand,bool>, AlterarTipoSanguineoCommandHandler>();
-            services.AddScoped < IQueryHandler<DoacaoHistoricoQuery, IEnumerable<HistoricoDoacaoDTO>>, DoacaoHistoricoQueryHandler>();
+            services.AddScoped<IQueryHandler<DoacaoHistoricoQuery, IEnumerable<HistoricoDoacaoDTO>>, DoacaoHistoricoQueryHandler>();
 
             services.AddScoped<IDomainEventDispatcher, EventDispatching>();
 
@@ -39,6 +43,8 @@ namespace DOS.Usuario.API.Extensions
             services.AddDbContext<UsuarioContext>(options =>
                         options.UseSqlServer(connectionString));
 
+            services.AddDbContext<DoacaoContext>(options =>
+                        options.UseSqlServer(connectionString));
 
             return services;
         }

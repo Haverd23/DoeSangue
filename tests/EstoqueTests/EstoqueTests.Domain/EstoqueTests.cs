@@ -1,5 +1,6 @@
 ﻿using DOS.Core.Enums;
 using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Estoque.Domain;
 using System.ComponentModel;
 
@@ -76,7 +77,7 @@ namespace EstoqueTests.Domain
             var quantidade = 1;
 
             // Act & Assert
-            var exception = Assert.Throws<DomainException>(() => estoque.RetirarUnidade(quantidade));
+            var exception = Assert.Throws<AppException>(() => estoque.RetirarUnidade(quantidade));
             Assert.Equal("Não há unidades disponíveis para este tipo sanguíneo.", exception.Message);
         }
         [Fact]

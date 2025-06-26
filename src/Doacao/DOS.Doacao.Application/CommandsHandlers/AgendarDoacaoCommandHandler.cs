@@ -1,4 +1,5 @@
 ﻿using DOS.Core.DomainObjects;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Commands;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.Eventos;
@@ -31,13 +32,13 @@ namespace DOS.Doacao.Application.CommandsHandlers
             d.Status == StatusDoacao.EmAndamento);
             if (possuiDoacaoEmAndamento)
             {
-                throw new ApplicationException("Você já possui algum processo de doação em andamento.");
+                throw new AppException("Você já possui algum processo de doação em andamento",409);
             }
 
             var usuario = await _usuarioRepository.GetById(command.UserId);
             if (usuario == null)
             {
-                throw new ApplicationException("Usuário não encontrado.");
+                throw new AppException("Usuário não encontrado",404);
             }
            
             string? tipoSanguineo = usuario?.TipoSanguineo?.ToString();
@@ -52,7 +53,7 @@ namespace DOS.Doacao.Application.CommandsHandlers
             var sucesso = await _doacaoRepository.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new ApplicationException("Erro ao agendar a doação");
+                throw new AppException("Erro ao agendar a doação",500);
             }
             await _domainEventDispatcher.DispatchEventsAsync(
                   new List<IDomainEvent>

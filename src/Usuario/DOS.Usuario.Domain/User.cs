@@ -1,6 +1,6 @@
 ﻿using DOS.Core.DomainObjects;
 using DOS.Core.Enums;
-using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Usuario.Domain.Events;
 using DOS.Usuario.Domain.ValueObjects;
 
@@ -39,7 +39,7 @@ namespace DOS.Usuario.Domain
         {
             if (nome.Length < 3)
             {
-                throw new DomainException("O nome deve ter pelo menos 3 caracteres");
+                throw new AppException("O nome deve ter pelo menos 3 caracteres",400);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using DOS.Core.Enums;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Commands;
 using DOS.Estoque.Application.Commands;
 using DOS.Estoque.Domain;
@@ -25,7 +26,7 @@ namespace DOS.Estoque.Application.CommandsHandlers
             tipo!.RetirarUnidade(command.Quantidade);
 
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new ApplicationException("Não foi possível retirar unidade sanguínea");
+            if (!sucesso) throw new AppException("Não foi possível retirar unidade sanguínea",500);
             return true;
 
            

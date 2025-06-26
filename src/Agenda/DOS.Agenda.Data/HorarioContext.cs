@@ -1,5 +1,7 @@
 ﻿using DOS.Agenda.Domain;
 using DOS.Core.Data;
+using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DOS.Agenda.Data
@@ -25,9 +27,9 @@ namespace DOS.Agenda.Data
                 var result = await base.SaveChangesAsync();
                 return result > 0;
             }
-            catch (Exception ex)
+            catch (AppException)
             {
-                throw new Exception("Erro ao salvar as mudanças no banco de dados", ex);
+                throw new AppException("Erro ao salvar as mudanças no banco de dados", 500);
 
             }
         }
