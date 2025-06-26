@@ -1,8 +1,9 @@
+using DOS.Core.Exceptions;
 using DOS.Usuario.API.Extensions;
 using DOS.Usuario.Data;
 using Microsoft.EntityFrameworkCore;
-using Polly.Retry;
 using Polly;
+using Polly.Retry;
 
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
@@ -26,6 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 using (var scope = app.Services.CreateScope())
 {

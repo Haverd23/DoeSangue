@@ -1,8 +1,9 @@
+using DOS.Core.Exceptions;
 using DOS.Doacao.API.Extensions;
 using DOS.Doacao.Data;
 using Microsoft.EntityFrameworkCore;
-using Polly.Retry;
 using Polly;
+using Polly.Retry;
 
 
 
@@ -27,6 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 using (var scope = app.Services.CreateScope())
 {
