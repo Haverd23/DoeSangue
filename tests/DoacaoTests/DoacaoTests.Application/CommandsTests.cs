@@ -2,31 +2,36 @@
 using DOS.Core.Enums;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.CommandsHandlers;
+using DOS.Doacao.Application.DTOs;
+using DOS.Doacao.Application.Services.Agenda;
+using DOS.Doacao.Application.Services.Usuario;
 using DOS.Doacao.Domain;
-using DOS.Usuario.Domain;
 using Moq;
+
 
 namespace DoacaoTests.Application
 {
     public class CommandsTests
     {
         private readonly Mock<IDoacaoRepository> _mockDoacaoRepository;
-        private readonly Mock<IUsuarioRepository> _mockUsuarioRepository;
-        private readonly AgendarDoacaoCommandHandler _handler;
+        private readonly Mock<IAgendaService> _mockAgendaService;
+        private readonly Mock<IUsuarioService> _mockUsuarioService;
         private readonly Mock<IDomainEventDispatcher> _mockDomainEventDispatcher;
-
+        private readonly AgendarDoacaoCommandHandler _handler;
 
         public CommandsTests()
         {
+            _mockDoacaoRepository = new Mock<IDoacaoRepository>();
+            _mockUsuarioService = new Mock<IUsuarioService>();
+            _mockAgendaService = new Mock<IAgendaService>();
             _mockDomainEventDispatcher = new Mock<IDomainEventDispatcher>();
 
-            _mockDoacaoRepository = new Mock<IDoacaoRepository>();
-            _mockUsuarioRepository = new Mock<IUsuarioRepository>();
             _handler = new AgendarDoacaoCommandHandler(
-                        _mockDoacaoRepository.Object,
-                        _mockUsuarioRepository.Object,
-                        _mockDomainEventDispatcher.Object
-                    );
+                _mockDoacaoRepository.Object,
+                _mockUsuarioService.Object,
+                _mockDomainEventDispatcher.Object,
+                _mockAgendaService.Object
+            );
         }
 
         [Fact(DisplayName = "Deve criar doação e retornar Id")]
@@ -35,21 +40,24 @@ namespace DoacaoTests.Application
             // Arrange
             var agendaId = Guid.NewGuid();
             var usuarioId = Guid.NewGuid();
-            var dataAgendada = DateTime.Now.AddDays(1);
             var tipoSanguineo = TipoSanguineo.APositivo;
 
-            var usuario = new User(
-                usuarioId,
+            var usuarioDto = new UsuarioDTO(
                 "João Silva",
                 "joao.silva@teste.com",
-                "00327332085",
-                "00327332085",
-                tipoSanguineo
+                tipoSanguineo.ToString()
             );
 
-            _mockUsuarioRepository
-                .Setup(r => r.GetById(usuarioId))
-                .ReturnsAsync(usuario);
+            var agendaDto = new AgendaDTO(agendaId, DateTime.Now.AddDays(1));
+
+
+            _mockUsuarioService
+                .Setup(r => r.ObterUsuarioPorId(usuarioId))
+                .ReturnsAsync(usuarioDto);
+
+            _mockAgendaService
+                .Setup(r => r.ObterAgendaPorId(agendaId))
+                .ReturnsAsync(agendaDto);
 
             _mockDoacaoRepository
                 .Setup(r => r.AdicionarAsync(It.IsAny<DoacaoRegistro>()))
@@ -59,7 +67,7 @@ namespace DoacaoTests.Application
                 .Setup(r => r.UnitOfWork.Commit())
                 .ReturnsAsync(true);
 
-            var command = new AgendarDoacaoCommand(agendaId, dataAgendada)
+            var command = new AgendarDoacaoCommand(agendaId)
             {
                 UserId = usuarioId
             };
@@ -69,9 +77,11 @@ namespace DoacaoTests.Application
 
             // Assert
             Assert.NotEqual(Guid.Empty, result);
-            _mockUsuarioRepository.Verify(r => r.GetById(usuarioId), Times.Once);
+            _mockUsuarioService.Verify(r => r.ObterUsuarioPorId(usuarioId), Times.Once);
+            _mockAgendaService.Verify(r => r.ObterAgendaPorId(agendaId), Times.Once);
             _mockDoacaoRepository.Verify(r => r.AdicionarAsync(It.IsAny<DoacaoRegistro>()), Times.Once);
             _mockDoacaoRepository.Verify(r => r.UnitOfWork.Commit(), Times.Once);
         }
+
     }
 }

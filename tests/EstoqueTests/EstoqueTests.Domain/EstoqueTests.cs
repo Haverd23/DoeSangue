@@ -78,7 +78,7 @@ namespace EstoqueTests.Domain
 
             // Act & Assert
             var exception = Assert.Throws<AppException>(() => estoque.RetirarUnidade(quantidade));
-            Assert.Equal("Não há unidades disponíveis para este tipo sanguíneo.", exception.Message);
+            Assert.Equal("Não há unidades disponíveis para este tipo sanguíneo", exception.Message);
         }
         [Fact]
         [DisplayName("Deve reiniciar contador de doações após adicionar unidade")]

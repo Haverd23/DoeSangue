@@ -28,7 +28,7 @@ namespace DOS.Doacao.API.Controllers
             }
 
 
-            var command = new AgendarDoacaoCommand(request.AgendaId, request.DataHoraAgendada);
+            var command = new AgendarDoacaoCommand(request.AgendaId);
             command.UserId = userId;
             var doacaoId = await _commandDispatcher.DispatchAsync<AgendarDoacaoCommand, Guid>(command);
             return CreatedAtAction(nameof(Agendar), new { id = doacaoId }, doacaoId);

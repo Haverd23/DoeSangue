@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Agenda\DOS.Agenda.Data\DOS.Agenda.Data.csproj" />
     <ProjectReference Include="..\..\Usuario\DOS.Usuario.Data\DOS.Usuario.Data.csproj" />
     <ProjectReference Include="..\DOS.Doacao.Application\DOS.Doacao.Application.csproj" />
     <ProjectReference Include="..\DOS.Doacao.Data\DOS.Doacao.Data.csproj" />
