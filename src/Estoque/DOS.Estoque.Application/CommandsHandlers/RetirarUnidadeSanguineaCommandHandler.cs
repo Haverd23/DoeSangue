@@ -25,7 +25,7 @@ namespace DOS.Estoque.Application.CommandsHandlers
             tipo!.RetirarUnidade(command.Quantidade);
 
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new Exception("Não foi possível retirar unidade sanguínea");
+            if (!sucesso) throw new ApplicationException("Não foi possível retirar unidade sanguínea");
             return true;
 
            

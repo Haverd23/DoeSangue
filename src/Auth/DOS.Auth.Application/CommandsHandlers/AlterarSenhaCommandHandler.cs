@@ -20,11 +20,11 @@ namespace DOS.Auth.Application.CommandsHandlers
         public async Task<bool> HandleAsync(AlterarSenhaCommand command)
         {
             var user = await _repository.ObterPorId(command.UserId);
-            if (user == null) throw new Exception("Usuário não encontrado");
+            if (user == null) throw new ApplicationException("Usuário não encontrado");
             var senhaCriptografada = _criptografia.SenhaHash(command.Senha);
             user.AlterarSenha(senhaCriptografada);
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new Exception("Não foi possível alterar a senha");
+            if (!sucesso) throw new ApplicationException("Não foi possível alterar a senha");
             return true;
         }
     }

@@ -20,7 +20,7 @@ namespace DOS.Usuario.Application.CommandsHandlers
             var cpf = new CPF(command.CPF);
             var usuario = await _repository.GetByCPF(cpf);
             if (usuario == null)
-                throw new Exception("Usuário não encontrado");
+                throw new ApplicationException("Usuário não encontrado");
 
             bool conversaoOk = Enum.TryParse<TipoSanguineo>(
                command.TipoSanguineo,
@@ -28,14 +28,14 @@ namespace DOS.Usuario.Application.CommandsHandlers
                out var tipoSanguineoConvertido);
 
             if (!conversaoOk)
-                throw new Exception("Tipo sanguíneo inválido.");
+                throw new ApplicationException("Tipo sanguíneo inválido.");
 
             usuario.AlterarTipoSanguineo(tipoSanguineoConvertido);
 
             var sucesso = await _repository.UnitOfWork.Commit();
 
             if (!sucesso)
-                throw new Exception("Erro ao atualizar o tipo sanguíneo.");
+                throw new ApplicationException("Erro ao atualizar o tipo sanguíneo.");
 
             return true;
         }

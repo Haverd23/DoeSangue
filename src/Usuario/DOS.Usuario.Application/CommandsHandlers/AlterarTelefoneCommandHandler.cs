@@ -18,10 +18,10 @@ namespace DOS.Usuario.Application.CommandsHandlers
         {
 
             var usuario = await _repository.GetById(command.UserId);
-            if (usuario == null) throw new Exception("Usuário não encontrado");
+            if (usuario == null) throw new ApplicationException("Usuário não encontrado");
             usuario.AlterTelefone(command.Telefone);
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new Exception("Não foi possível alterar o telefone");
+            if (!sucesso) throw new ApplicationException("Não foi possível alterar o telefone");
             return true;
         }
     }

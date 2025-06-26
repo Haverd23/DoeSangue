@@ -15,7 +15,7 @@ namespace DOS.Agenda.Application.Kafka.EventosHandlers
         public async Task HandleAsync(DoacaoAgendadaEvent evento)
         {
             var doacao = await _horarioRepository.ObterPorIdAsync(evento.AgendaId);
-            if (doacao == null) throw new Exception("Doaoção não encontrada");
+            if (doacao == null) throw new ApplicationException("Doaoção não encontrada");
             doacao.ReservarVaga();
             await _horarioRepository.UnitOfWork.Commit();
         }

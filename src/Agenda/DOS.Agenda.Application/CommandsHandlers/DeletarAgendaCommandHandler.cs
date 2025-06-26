@@ -16,10 +16,10 @@ namespace DOS.Agenda.Application.CommandsHandlers
         public async Task<bool> HandleAsync(DeletarAgendaCommand command)
         {
             var agenda = await _repository.ObterPorIdAsync(command.AgendaId);
-            if (agenda == null) throw new Exception("Agenda não encontrada");
+            if (agenda == null) throw new ApplicationException("Agenda não encontrada");
             await _repository.Deletar(agenda.Id);
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new Exception("Não foi possível deletar essa agenda");
+            if (!sucesso) throw new ApplicationException("Não foi possível deletar essa agenda");
             return true;
         }
     }

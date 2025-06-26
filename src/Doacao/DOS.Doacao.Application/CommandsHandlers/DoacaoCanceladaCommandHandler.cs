@@ -23,13 +23,13 @@ namespace DOS.Doacao.Application.CommandsHandlers
             var doacao =  await _repository.ObterPorIdAsync(command.DoacaoId);
             if (doacao == null)
             {
-                throw new Exception("Doação não encontrada");
+                throw new ApplicationException("Doação não encontrada");
             }
             doacao.Cancelar();
             var sucesso = await _repository.UnitOfWork.Commit();
             if(!sucesso)
             {
-                throw new Exception("Não foi possível atualizar status da doação para cancelado");
+                throw new ApplicationException("Não foi possível atualizar status da doação para cancelado");
             }
             await _domainEventDispatcher.DispatchEventsAsync(doacao.DomainEvents);
             return true;

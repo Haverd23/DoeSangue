@@ -16,10 +16,10 @@ namespace DOS.Auth.Application.CommandsHandlers
         public async Task<bool> HandleAsync(AlterarEmailCommand command)
         {
             var user = await _repository.ObterPorId(command.UserId);
-            if (user == null) throw new Exception("Usuário não encontrado");
+            if (user == null) throw new ApplicationException("Usuário não encontrado");
             user.AlterarEmail(command.Email);
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new Exception("Não foi possível alterar o email");
+            if (!sucesso) throw new ApplicationException("Não foi possível alterar o email");
             return true;
         }
     }
