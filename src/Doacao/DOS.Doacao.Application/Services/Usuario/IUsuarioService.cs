@@ -1,7 +1,6 @@
-﻿
-using DOS.Doacao.Application.DTOs;
+﻿using DOS.Doacao.Application.DTOs;
 
-namespace DOS.Doacao.Application.Services
+namespace DOS.Doacao.Application.Services.Usuario
 {
     public interface IUsuarioService
     {

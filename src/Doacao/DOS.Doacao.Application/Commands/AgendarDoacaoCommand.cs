@@ -9,10 +9,9 @@ namespace DOS.Doacao.Application.Commands
         public string TipoSanguineo { get; set; }
         public DateTime DataHoraAgendada { get; private set; }
 
-        public AgendarDoacaoCommand(Guid agendaId, DateTime dataHoraAgendada)
+        public AgendarDoacaoCommand(Guid agendaId)
         {
             AgendaId = agendaId;
-            DataHoraAgendada = dataHoraAgendada;
         }
     }
 }
