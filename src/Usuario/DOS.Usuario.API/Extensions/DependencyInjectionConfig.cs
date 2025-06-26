@@ -27,7 +27,9 @@ namespace DOS.Usuario.API.Extensions
             services.AddScoped < IQueryHandler<DoacaoHistoricoQuery, IEnumerable<HistoricoDoacaoDTO>>, DoacaoHistoricoQueryHandler>();
 
             services.AddScoped<IDomainEventDispatcher, EventDispatching>();
-            services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer("localhost:9092"));
+
+            var kafkaBootstrapServers = configuration["Kafka:BootstrapServers"];
+            services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer(kafkaBootstrapServers));
 
 
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
