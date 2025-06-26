@@ -1,4 +1,5 @@
-﻿using DOS.Core.Mediator.Commands;
+﻿using DOS.Core.Exceptions.DOS.Core.Exceptions;
+using DOS.Core.Mediator.Commands;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Domain;
 
@@ -18,10 +19,10 @@ namespace DOS.Usuario.Application.CommandsHandlers
         {
 
             var usuario = await _repository.GetById(command.UserId);
-            if (usuario == null) throw new ApplicationException("Usuário não encontrado");
+            if (usuario == null) throw new AppException("Usuário não encontrado",404);
             usuario.AlterTelefone(command.Telefone);
             var sucesso = await _repository.UnitOfWork.Commit();
-            if (!sucesso) throw new ApplicationException("Não foi possível alterar o telefone");
+            if (!sucesso) throw new AppException("Não foi possível alterar o telefone",500);
             return true;
         }
     }

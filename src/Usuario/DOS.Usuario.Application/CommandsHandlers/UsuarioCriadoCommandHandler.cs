@@ -1,5 +1,6 @@
 ﻿using DOS.Core.DomainObjects;
 using DOS.Core.Enums;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Commands;
 using DOS.Usuario.Application.Commands;
 using DOS.Usuario.Domain;
@@ -26,7 +27,7 @@ namespace DOS.Usuario.Application.CommandsHandlers
             var sucesso = await _usuarioRepository.UnitOfWork.Commit();
             if (!sucesso)
             {
-                throw new ApplicationException("Erro ao salvar o usuário");
+                throw new AppException("Erro ao salvar o usuário",500);
             }
             await _domainEventDispatcher.DispatchEventsAsync(usuario.DomainEvents);
             return usuario.Id;
