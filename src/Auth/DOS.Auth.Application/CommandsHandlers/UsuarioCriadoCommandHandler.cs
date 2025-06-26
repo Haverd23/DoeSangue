@@ -32,7 +32,7 @@ namespace DOS.Auth.Application.CommandsHandlers
 
             var user = new User(command.Email, senhaHash);
 
-            if(user.Email.Entrada == "alvesgabriel1880@gmail.com")
+            if(user.Email.Entrada == "emailAdministrador")
             {
                 user.AlterarRole("Administrador");
             }
