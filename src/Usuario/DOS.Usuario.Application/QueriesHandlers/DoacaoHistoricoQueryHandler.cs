@@ -1,8 +1,8 @@
 ﻿using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Queries;
-using DOS.Doacao.Domain;
 using DOS.Usuario.Application.DTOs;
 using DOS.Usuario.Application.Queries;
+using DOS.Usuario.Application.Services;
 using DOS.Usuario.Domain;
 
 namespace DOS.Usuario.Application.QueriesHandlers
@@ -11,25 +11,21 @@ namespace DOS.Usuario.Application.QueriesHandlers
         IEnumerable<HistoricoDoacaoDTO>>
     {
         private readonly IUsuarioRepository _repository;
-        private readonly IDoacaoRepository _doacaoRepository;
+        private readonly IDoacaoService _dacaoService;
 
         public DoacaoHistoricoQueryHandler(IUsuarioRepository repository,
-            IDoacaoRepository doacaoRepository)
+            IDoacaoService doacaoService)
         {
             _repository = repository;
-            _doacaoRepository = doacaoRepository;
+            _dacaoService = doacaoService;
         }
 
         public async Task<IEnumerable<HistoricoDoacaoDTO>> HandleAsync(DoacaoHistoricoQuery query)
         {
             var usuario = await _repository.GetById(query.UsuarioID);
             if (usuario == null) throw new AppException("Usuário não encontrado",404);
-            var doacao = await _doacaoRepository.ObterPorUsuarioAsync(usuario.Id);
-            return doacao.Select(d => new HistoricoDoacaoDTO
-            {
-                DataHora = d.DataHoraAgendada,
-                Status = d.Status.ToString(),
-            });
+            return await _dacaoService.ObterDoacaoPorId(usuario.Id);
+            
         }
     }
 }
