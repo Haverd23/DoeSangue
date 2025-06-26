@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Agenda\DOS.Agenda.Domain\DOS.Agenda.Domain.csproj" />
     <ProjectReference Include="..\..\Core\DOS.Core\DOS.Core.csproj" />
     <ProjectReference Include="..\..\Usuario\DOS.Usuario.Domain\DOS.Usuario.Domain.csproj" />
     <ProjectReference Include="..\DOS.Doacao.Data\DOS.Doacao.Data.csproj" />

@@ -37,7 +37,7 @@ namespace DoacaoTests.Application
 
             // Act & Assert
             var ex = Assert.Throws<AppException>(() => new DoacaoRegistro(agendaId, usuarioId, tipoSanguineo, dataAgendada));
-            Assert.Equal("A data agendada deve ser futura.", ex.Message);
+            Assert.Equal("A data agendada deve ser futura", ex.Message);
         }
         [Fact(DisplayName = "Iniciar doação agendada deve alterar status para EmAndamento")]
         public void Iniciar_QuandoDoacaoAgendada_DeveAlterarStatusParaEmAndamento()
