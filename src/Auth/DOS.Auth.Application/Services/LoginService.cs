@@ -1,6 +1,7 @@
 ﻿using DOS.Auth.Application.Services.Interfaces;
 using DOS.Auth.Domain.Interfaces;
 using DOS.Auth.Domain.Models;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 
 namespace DOS.Auth.Application.Services
 {
@@ -22,7 +23,7 @@ namespace DOS.Auth.Application.Services
         {
             var usuario = await _userRepository.ObterPorEmail(email);
             if (usuario == null || !_senhaCriptografia.VerificarSenha(senha, usuario.Senha))
-                throw new UnauthorizedAccessException("Usuário ou senha inválidos");
+                throw new AppException("Usuário ou senha inválidos",400);
 
             return await _tokenJWT.GerarToken(usuario);
         }
