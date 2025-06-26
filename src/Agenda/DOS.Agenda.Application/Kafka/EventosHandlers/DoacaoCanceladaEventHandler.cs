@@ -1,5 +1,7 @@
 ﻿using DOS.Agenda.Application.Kafka.Eventos;
 using DOS.Agenda.Domain;
+using DOS.Core.Exceptions;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 
 namespace DOS.Agenda.Application.Kafka.EventosHandlers
 {
@@ -15,7 +17,7 @@ namespace DOS.Agenda.Application.Kafka.EventosHandlers
         public async Task HandleAsync(DoacaoCanceladaEvent evento)
         {
             var agenda = await _horarioRepository.ObterPorIdAsync(evento.AgendaId);
-            if (agenda == null) throw new ApplicationException("Agenda não encontrada.");
+            if (agenda == null) throw new AppException("Agenda não encontrada",404);
             agenda.LiberarVaga();
             await _horarioRepository.UnitOfWork.Commit();
 

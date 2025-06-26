@@ -1,5 +1,6 @@
 ﻿using DOS.Agenda.Domain;
 using DOS.Core.Data;
+using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DOS.Agenda.Data
@@ -41,7 +42,7 @@ namespace DOS.Agenda.Data
         {
             var agenda = await ObterPorIdAsync(id);
             if (agenda == null)
-                throw new Exception("Agenda não encontrada");
+                throw new AppException("Agenda não encontrada", 500);
             _context.Remove(agenda);
         }
         public void Dispose()
