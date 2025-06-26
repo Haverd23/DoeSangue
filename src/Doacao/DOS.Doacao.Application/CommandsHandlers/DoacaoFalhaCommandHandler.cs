@@ -3,7 +3,7 @@ using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Commands;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.Eventos;
-using DOS.Doacao.Application.Services;
+using DOS.Doacao.Application.Services.Usuario;
 using DOS.Doacao.Domain;
 
 namespace DOS.Doacao.Application.CommandsHandlers

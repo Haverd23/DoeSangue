@@ -3,7 +3,7 @@ using DOS.Doacao.Application.DTOs;
 using DOS.Usuario.Domain;
 
 
-namespace DOS.Doacao.Application.Services
+namespace DOS.Doacao.Application.Services.Usuario
 {
     public class UsuarioService : IUsuarioService
     {
