@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\DOS.Core\DOS.Core.csproj" />
     <ProjectReference Include="..\DOS.Auth.Application\DOS.Auth.Application.csproj" />
   </ItemGroup>
 

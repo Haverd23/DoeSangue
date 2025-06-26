@@ -3,7 +3,7 @@ using DOS.Auth.Application.Commands;
 using DOS.Auth.Application.Services.Interfaces;
 using DOS.Auth.Domain.Models;
 using DOS.Core.Mediator.Commands;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -25,20 +25,29 @@ namespace DOS.Auth.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarUsuario([FromBody] CriarUserDTO request)
         {
-            var command = new UsuarioCriadoCommand(request.Email, request.Senha);
+            
+            
+                var command = new UsuarioCriadoCommand(request.Email, request.Senha);
 
-            var usuarioId = await _commandDispatcher
-                .DispatchAsync<UsuarioCriadoCommand, Guid>(command);
+                var usuarioId = await _commandDispatcher
+                    .DispatchAsync<UsuarioCriadoCommand, Guid>(command);
 
-            return CreatedAtAction(nameof(CriarUsuario), new { id = usuarioId }, usuarioId);
+                return CreatedAtAction(nameof(CriarUsuario), new { id = usuarioId }, usuarioId);
+            
+            
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO request)
         {
-            var email = new Email(request.Email);
-            var token = await _loginService.Autenticar(email, request.Senha);
-            return Ok(token);
+          
+                var email = new Email(request.Email);
+
+                var token = await _loginService.Autenticar(email, request.Senha);
+
+                return Ok(token);
+          
         }
+        [Authorize]
         [HttpPut("alterar/senha")]
         public async Task<IActionResult> AlterarSenha([FromBody] AlterarSenhaDTO request)
         {
@@ -52,6 +61,7 @@ namespace DOS.Auth.API.Controllers
             var commandDispatcher = await _commandDispatcher.DispatchAsync<AlterarSenhaCommand,bool>(command);
             return NoContent();
         }
+        [Authorize]
         [HttpPut("alterar/email")]
         public async Task<IActionResult> AlterarEmail([FromBody] AlterarEmailDTO request)
         {
