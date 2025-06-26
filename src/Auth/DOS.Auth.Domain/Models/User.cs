@@ -1,5 +1,6 @@
 ﻿using DOS.Auth.Domain.Events;
 using DOS.Core.DomainObjects;
+using DOS.Core.Exceptions;
 namespace DOS.Auth.Domain.Models
 {
     public class User : Entity, IAggregateRoot
@@ -27,22 +28,22 @@ namespace DOS.Auth.Domain.Models
         public void AlterarEmail(string novoEmail)
         {
             if (novoEmail == null)
-                throw new Exception("Email Inválido");
+                throw new DomainException("Email Inválido");
             Email = new Email(novoEmail);
             AddDomainEvent(new EmailAlteradoEvento(Id, Email));
         }
         public static void SenhaValida(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
-                throw new Exception("Senha inválida");
+                throw new DomainException("Senha inválida");
             if (senha.Length < 6)
-                throw new Exception("Senha deve ter pelo menos 6 caracteres");
+                throw new DomainException("Senha deve ter pelo menos 6 caracteres");
             if (!senha.Any(char.IsDigit))
-                throw new Exception("Senha deve conter pelo menos um número");
+                throw new DomainException("Senha deve conter pelo menos um número");
             if (!senha.Any(char.IsUpper))
-                throw new Exception("Senha deve conter pelo menos uma letra maiúscula");
+                throw new DomainException("Senha deve conter pelo menos uma letra maiúscula");
             if (!senha.Any(char.IsLower))
-                throw new Exception("Senha deve conter pelo menos uma letra minúscula");
+                throw new DomainException("Senha deve conter pelo menos uma letra minúscula");
         }      
     }
 }

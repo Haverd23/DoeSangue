@@ -1,4 +1,5 @@
 ﻿using DOS.Core.Enums;
+using DOS.Core.Exceptions;
 using DOS.Usuario.Domain;
 
 namespace UsuarioTests.Domain
@@ -39,7 +40,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => new User(id,nome, email, cpf, telefone, tipoSanguineo));
+            var ex = Assert.Throws<DomainException>(() => new User(id,nome, email, cpf, telefone, tipoSanguineo));
         }
         [Fact(DisplayName = "Criar usuário com nome inválido deve lançar exceção")]
         public void Construtor_QuandoNomeInvalido_DeveLancerExcecao()
@@ -53,7 +54,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => new User(id,nome, email, cpf, telefone, tipoSanguineo));
+            var ex = Assert.Throws<DomainException>(() => new User(id,nome, email, cpf, telefone, tipoSanguineo));
         }
         [Fact(DisplayName = "Criar usuário com telefone inválido deve lançar exceção")]
         public void Construtor_QuandoTelefoneInvalido_DeveLancarExececao()
@@ -67,7 +68,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => new User(id,nome, email, cpf, telefone, tipoSanguineo));
+            var ex = Assert.Throws<DomainException>(() => new User(id,nome, email, cpf, telefone, tipoSanguineo));
         }
         [Fact(DisplayName = "Alterar telefone com telefone inválido deve lançar exceção")]
         public void AlterarTelefone_QuandoTelefoneInvalido_DeveLancarExcecao()
@@ -81,7 +82,7 @@ namespace UsuarioTests.Domain
             var tipoSanguineo = TipoSanguineo.ABNegativo;
             var usuario = new User(id,nome, email, cpf, telefone, tipoSanguineo);
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => usuario.AlterTelefone("119876543"));
+            var ex = Assert.Throws<DomainException>(() => usuario.AlterTelefone("119876543"));
         }
         [Fact(DisplayName = "Alterar telefone com telefone válido deve alterar com sucesso")]
         public void AlterarTelefone_QuandoTelefoneValido_DeveAlterarComSucesso()

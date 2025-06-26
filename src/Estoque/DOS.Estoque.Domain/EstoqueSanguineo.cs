@@ -1,5 +1,6 @@
 ﻿using DOS.Core.DomainObjects;
 using DOS.Core.Enums;
+using DOS.Core.Exceptions;
 
 namespace DOS.Estoque.Domain
 {
@@ -36,9 +37,9 @@ namespace DOS.Estoque.Domain
         public void RetirarUnidade(int quantidade)
         {
             if (Unidades <= 0)
-                throw new Exception("Não há unidades disponíveis para este tipo sanguíneo.");
+                throw new DomainException("Não há unidades disponíveis para este tipo sanguíneo.");
             if(quantidade > Unidades)
-                throw new Exception("Não há unidades suficiente para este tipo sanguíneo.");
+                throw new DomainException("Não há unidades suficiente para este tipo sanguíneo.");
 
             Unidades-=quantidade;
         }

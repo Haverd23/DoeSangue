@@ -1,4 +1,5 @@
 ﻿using DOS.Agenda.Domain;
+using DOS.Core.Exceptions;
 
 namespace Agenda.Tests.Domain
 {
@@ -29,7 +30,7 @@ namespace Agenda.Tests.Domain
             var vagasTotais = -1;
 
             // Act & Assert
-            var ex = Assert.Throws<ArgumentException>(() => new Horario(dataHora, vagasTotais));
+            var ex = Assert.Throws<DomainException>(() => new Horario(dataHora, vagasTotais));
             Assert.Equal("O número total de vagas deve ser maior que zero.", ex.Message);
         }
         [Fact(DisplayName = "Criar horário de doação com data no passado deve lançar exceção")]
@@ -40,7 +41,7 @@ namespace Agenda.Tests.Domain
             var vagasTotais = 10;
 
             // Act & Assert
-            var ex = Assert.Throws<ArgumentException>(() => new Horario(dataHora, vagasTotais));
+            var ex = Assert.Throws<DomainException>(() => new Horario(dataHora, vagasTotais));
             Assert.Equal("A data e hora do horário não podem ser no passado.", ex.Message);
         }
         [Fact(DisplayName = "Reservar vaga deve incrementar o número de vagas ocupadas")]
@@ -68,7 +69,7 @@ namespace Agenda.Tests.Domain
             horario.ReservarVaga(); 
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => horario.ReservarVaga());
+            var ex = Assert.Throws<DomainException>(() => horario.ReservarVaga());
             Assert.Equal("Não há vagas disponíveis para este horário.", ex.Message);
         }
         [Fact(DisplayName = "Liberar vaga deve decrementar o número de vagas ocupadas")]
@@ -96,7 +97,7 @@ namespace Agenda.Tests.Domain
             var horario = new Horario(dataHora, vagasTotais);
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => horario.LiberarVaga());
+            var ex = Assert.Throws<DomainException>(() => horario.LiberarVaga());
             Assert.Equal("Não há vagas ocupadas para liberar.", ex.Message);
         }
         [Fact(DisplayName = "Verificar se há vagas disponíveis deve retornar true quando houver vagas")]
@@ -153,7 +154,7 @@ namespace Agenda.Tests.Domain
             var vagasAtualizadas = 0;
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>( () => horario.AlterarQuantidadeVagas(vagasAtualizadas));
+            var ex = Assert.Throws<DomainException>( () => horario.AlterarQuantidadeVagas(vagasAtualizadas));
             Assert.Equal("Quantidade de vagas deve ser maior que 0", ex.Message);
         }
         [Fact(DisplayName = "Alterar horário válido com data e hora válidos")]
@@ -182,7 +183,7 @@ namespace Agenda.Tests.Domain
             var horarioAtualizado = DateTime.UtcNow.AddDays(-2);
 
             // Act & Assert
-            var ex = Assert.Throws<Exception>(() => horario.AlterarDataHora(horarioAtualizado));
+            var ex = Assert.Throws<DomainException>(() => horario.AlterarDataHora(horarioAtualizado));
             Assert.Equal("A data e hora do horário não podem ser no passado.", ex.Message);
 
         }

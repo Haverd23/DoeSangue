@@ -3,6 +3,7 @@
 namespace Auth.Tests.Domain
 {
     using DOS.Auth.Domain.Models;
+    using DOS.Core.Exceptions;
     using System;
     using Xunit;
 
@@ -36,7 +37,7 @@ namespace Auth.Tests.Domain
                 var senha = "Teste123@";
 
                 // Act & Assert
-                var ex = Assert.Throws<Exception>(() => new User(email, senha));
+                var ex = Assert.Throws<DomainException>(() => new User(email, senha));
                 Assert.Equal("Email Inválido", ex.Message);
             }
 
@@ -48,7 +49,7 @@ namespace Auth.Tests.Domain
                 var senha = "";
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => new User(email, senha));
+                var ex = Assert.Throws<DomainException>(() => new User(email, senha));
 
                 // Assert
                 Assert.Equal("Senha inválida", ex.Message);
@@ -62,7 +63,7 @@ namespace Auth.Tests.Domain
                 var senha = "T12@";
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => new User(email, senha));
+                var ex = Assert.Throws<DomainException>(() => new User(email, senha));
 
                 // Assert
                 Assert.Equal("Senha deve ter pelo menos 6 caracteres", ex.Message);
@@ -76,7 +77,7 @@ namespace Auth.Tests.Domain
                 var senha = "SenhaSemDigito";
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => new User(email, senha));
+                var ex = Assert.Throws<DomainException>(() => new User(email, senha));
 
                 // Assert
                 Assert.Equal("Senha deve conter pelo menos um número", ex.Message);
@@ -90,7 +91,7 @@ namespace Auth.Tests.Domain
                 var senha = "senha123@";
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => new User(email, senha));
+                var ex = Assert.Throws<DomainException>(() => new User(email, senha));
 
                 // Assert
                 Assert.Equal("Senha deve conter pelo menos uma letra maiúscula", ex.Message);
@@ -104,7 +105,7 @@ namespace Auth.Tests.Domain
                 var senha = "SENHA123@";
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => new User(email, senha));
+                var ex = Assert.Throws<DomainException>(() => new User(email, senha));
 
                 // Assert
                 Assert.Equal("Senha deve conter pelo menos uma letra minúscula", ex.Message);
@@ -135,7 +136,7 @@ namespace Auth.Tests.Domain
                 var user = new User(email, senha);
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => user.AlterarSenha(""));
+                var ex = Assert.Throws<DomainException>(() => user.AlterarSenha(""));
 
                 // Assert
                 Assert.Equal("Senha inválida", ex.Message);
@@ -150,7 +151,7 @@ namespace Auth.Tests.Domain
                 var user = new User(email, senha);
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => user.AlterarSenha("T1@"));
+                var ex = Assert.Throws<DomainException>(() => user.AlterarSenha("T1@"));
 
                 // Assert
                 Assert.Equal("Senha deve ter pelo menos 6 caracteres", ex.Message);
@@ -181,7 +182,7 @@ namespace Auth.Tests.Domain
                 var user = new User(email, senha);
 
                 // Act
-                var ex = Assert.Throws<Exception>(() => user.AlterarEmail("emailinvalido"));
+                var ex = Assert.Throws<DomainException>(() => user.AlterarEmail("emailinvalido"));
 
                 // Assert
                 Assert.Equal("Email Inválido", ex.Message);
