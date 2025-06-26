@@ -3,9 +3,9 @@ using DOS.Core.Exceptions.DOS.Core.Exceptions;
 using DOS.Core.Mediator.Commands;
 using DOS.Doacao.Application.Commands;
 using DOS.Doacao.Application.Eventos;
+using DOS.Doacao.Application.Services;
 using DOS.Doacao.Domain;
 using DOS.Doacao.Domain.Enums;
-using DOS.Usuario.Domain;
 
 
 namespace DOS.Doacao.Application.CommandsHandlers
@@ -13,15 +13,15 @@ namespace DOS.Doacao.Application.CommandsHandlers
     public class AgendarDoacaoCommandHandler : ICommandHandler<AgendarDoacaoCommand, Guid>
     {
         private readonly IDoacaoRepository _doacaoRepository;
-        private readonly IUsuarioRepository _usuarioRepository;
         private readonly IDomainEventDispatcher _domainEventDispatcher;
+        private readonly IUsuarioService _usuarioService;
         public AgendarDoacaoCommandHandler(IDoacaoRepository doacaoRepository,
-            IUsuarioRepository usuarioRepository,
+            IUsuarioService usuarioService,
             IDomainEventDispatcher domainEventDispatcher)
         {
             _doacaoRepository = doacaoRepository;
-            _usuarioRepository = usuarioRepository;
             _domainEventDispatcher = domainEventDispatcher;
+            _usuarioService = usuarioService;
         }
         public async Task<Guid> HandleAsync(AgendarDoacaoCommand command)
         {
@@ -35,18 +35,15 @@ namespace DOS.Doacao.Application.CommandsHandlers
                 throw new AppException("Você já possui algum processo de doação em andamento",409);
             }
 
-            var usuario = await _usuarioRepository.GetById(command.UserId);
+            var usuario = await _usuarioService.ObterUsuarioPorId(command.UserId);
             if (usuario == null)
             {
                 throw new AppException("Usuário não encontrado",404);
             }
-           
-            string? tipoSanguineo = usuario?.TipoSanguineo?.ToString();
-
             var doacao = new DoacaoRegistro(
             command.AgendaId,
             command.UserId,
-            tipoSanguineo,
+            usuario.TipoSanguineo,
             command.DataHoraAgendada
         );
             await _doacaoRepository.AdicionarAsync(doacao);
