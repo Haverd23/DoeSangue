@@ -29,7 +29,10 @@ namespace DOS.Doacao.API.Extensions
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer("localhost:9092"));
+
+            var kafkaBootstrapServers = configuration["Kafka:BootstrapServers"];
+
+            services.AddSingleton<IKafkaProducer>(provider => new KafkaProducer(kafkaBootstrapServers));
             services.AddScoped<IDomainEventDispatcher, EventDispatching>();
 
 

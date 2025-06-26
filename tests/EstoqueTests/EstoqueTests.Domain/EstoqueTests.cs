@@ -55,12 +55,13 @@ namespace EstoqueTests.Domain
         {
             // Arrange
             var estoque = new EstoqueSanguineo(TipoSanguineo.APositivo);
+            var quantidade = 1;
             for (int i = 0; i < 5; i++)
             {
                 estoque.RegistrarDoacao();
             }
             // Act
-            estoque.RetirarUnidade();
+            estoque.RetirarUnidade(quantidade);
 
             // Assert
             Assert.Equal(0, estoque.Unidades);
@@ -71,9 +72,10 @@ namespace EstoqueTests.Domain
         {
             // Arrange
             var estoque = new EstoqueSanguineo(TipoSanguineo.APositivo);
+            var quantidade = 1;
 
             // Act & Assert
-            var exception = Assert.Throws<Exception>(() => estoque.RetirarUnidade());
+            var exception = Assert.Throws<Exception>(() => estoque.RetirarUnidade(quantidade));
             Assert.Equal("Não há unidades disponíveis para este tipo sanguíneo.", exception.Message);
         }
         [Fact]
@@ -82,13 +84,14 @@ namespace EstoqueTests.Domain
         {
             // Arrange
             var estoque = new EstoqueSanguineo(TipoSanguineo.APositivo);
+            var quantidade = 1;
             for (int i = 0; i < 5; i++)
             {
                 estoque.RegistrarDoacao();
             }
             // Act
 
-            estoque.RetirarUnidade();
+            estoque.RetirarUnidade(quantidade);
             estoque.RegistrarDoacao();
             // Assert
             Assert.Equal(0, estoque.Unidades);

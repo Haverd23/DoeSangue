@@ -31,11 +31,12 @@ namespace DOS.Notificacao.API.Extensions
                 new EmailService(smtpHost, smtpPort, smtpUser, smtpPass, smtpUseSsl: true));
 
             // Kafka
+            var kafkaBootstrapServers = configuration["Kafka:BootstrapServers"];
             services.AddSingleton<KafkaEventRegistry>();
             services.AddHostedService<KafkaConsumerService>(provider =>
             {
                 var registry = provider.GetRequiredService<KafkaEventRegistry>();
-                var bootstrapServers = "localhost:9092";
+                var bootstrapServers = kafkaBootstrapServers;
                 var groupId = "notificacao-consumer-group";
                 return new KafkaConsumerService(provider, registry, bootstrapServers, groupId);
             });
