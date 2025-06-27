@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DOS.Estoque.API.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class EstoqueController : ControllerBase

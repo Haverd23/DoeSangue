@@ -4,10 +4,12 @@ using DOS.Agenda.Application.DTOs;
 using DOS.Agenda.Application.Queries;
 using DOS.Core.Mediator.Commands;
 using DOS.Core.Mediator.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DOS.Agenda.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AgendaController : ControllerBase
@@ -21,7 +23,7 @@ namespace DOS.Agenda.API.Controllers
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
-
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> CriarHorario([FromBody] CriarHorarioDTO dto)
         {
@@ -33,6 +35,7 @@ namespace DOS.Agenda.API.Controllers
             var horarioId = await _commandDispatcher.DispatchAsync<AgendaCriadaCommand, Guid>(command);
             return CreatedAtAction(nameof(CriarHorario), new { id = horarioId }, horarioId);
         }
+        [Authorize(Roles = "Administrador")]
         [HttpDelete]
         public async Task<IActionResult> DeletarHorario([FromBody] ApagarHorarioDTO dto)
         {
@@ -45,6 +48,7 @@ namespace DOS.Agenda.API.Controllers
                 bool>(command);
             return NoContent();
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPut("atualizar/horario")]
         public async Task<IActionResult> AtualizarHorario([FromBody] AlterarHorarioDTO dto)
         {
@@ -57,6 +61,7 @@ namespace DOS.Agenda.API.Controllers
                 bool>(command);
             return NoContent();
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPut("atualizar/quantidade/vagas")]
         public async Task<IActionResult> AtualizarQuantidadeVagas([FromBody]
         AlterarQuantidadeVagasDTO dto)
