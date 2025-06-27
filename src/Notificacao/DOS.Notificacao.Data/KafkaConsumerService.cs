@@ -69,14 +69,14 @@ namespace DOS.Notificacao.Data
                 }
                 catch (ConsumeException ex)
                 {
-                    Console.WriteLine($"Erro ao consumir mensagem: {ex.Message}");
+                    Console.WriteLine($"Erro ao consumir mensagem: {ex.Error.Reason}");
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Erro no processamento: {ex.Message}");
-                }
+
+
             }
         }
+        
+        
 
         public override async Task StopAsync(CancellationToken cancellationToken)
         {

@@ -42,7 +42,6 @@ namespace DOS.Agenda.Data.Kafka
             using var consumer = new ConsumerBuilder<string, string>(config).Build();
             consumer.Subscribe(_topics);
 
-            Console.WriteLine("🚀 Kafka Consumer iniciado e ouvindo tópicos...");
 
             try
             {
@@ -58,7 +57,6 @@ namespace DOS.Agenda.Data.Kafka
                             continue;
                         }
 
-                        Console.WriteLine($"✅ Mensagem recebida do tópico {result.Topic}: {result.Message.Value}");
 
                         using var scope = _serviceProvider.CreateScope();
                         await ProcessMessageAsync(result.Topic, result.Message.Value, scope);
@@ -70,12 +68,12 @@ namespace DOS.Agenda.Data.Kafka
                     }
                     catch (OperationCanceledException)
                     {
-                        Console.WriteLine("⛔ Cancelamento solicitado.");
                         break;
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"❌ Erro inesperado: {ex.Message}");
+
                         await Task.Delay(2000, stoppingToken);
                     }
                 }
@@ -83,7 +81,6 @@ namespace DOS.Agenda.Data.Kafka
             finally
             {
                 consumer.Close();
-                Console.WriteLine("🛑 Kafka Consumer encerrado.");
             }
         }
 
@@ -109,13 +106,13 @@ namespace DOS.Agenda.Data.Kafka
                         break;
 
                     default:
-                        Console.WriteLine($"⚠️ Tópico desconhecido: {topic}");
                         break;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Erro no processamento da mensagem: {ex.Message}");
+
             }
         }
     }
