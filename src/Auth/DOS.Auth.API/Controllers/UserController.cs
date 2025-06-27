@@ -44,8 +44,8 @@ namespace DOS.Auth.API.Controllers
 
                 var token = await _loginService.Autenticar(email, request.Senha);
 
-                return Ok(token);
-          
+                return Ok(new { token });
+
         }
         [Authorize]
         [HttpPut("alterar/senha")]
