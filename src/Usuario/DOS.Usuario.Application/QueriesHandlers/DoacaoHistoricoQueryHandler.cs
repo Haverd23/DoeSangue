@@ -24,8 +24,10 @@ namespace DOS.Usuario.Application.QueriesHandlers
         {
             var usuario = await _repository.GetById(query.UsuarioID);
             if (usuario == null) throw new AppException("Usuário não encontrado",404);
-            return await _dacaoService.ObterDoacaoPorId(usuario.Id);
-            
+            var doacao = await _dacaoService.ObterDoacaoPorId(usuario.Id);
+            if (doacao == null) throw new AppException("Nenhuma doação encontrada", 404);
+            return doacao;
+
         }
     }
 }
