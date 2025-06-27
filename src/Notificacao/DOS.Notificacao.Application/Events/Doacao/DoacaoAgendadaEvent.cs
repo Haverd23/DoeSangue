@@ -3,9 +3,7 @@ namespace DOS.Notificacao.Application.Events.Doacao
 {
     public class DoacaoAgendadaEvent
     {
-        [JsonPropertyName("name")]
-        public string Nome { get; private set; }
-
+       
         [JsonPropertyName("email")]
         public string Email { get; set; }
 

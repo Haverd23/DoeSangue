@@ -64,12 +64,6 @@ namespace DOS.Notificacao.Application.EventsHandlers.Usuario
                     <h2>Bem-vindo, {evento.Nome}!</h2>
                     <p>Seu cadastro no <strong>Sistema de Doação de Sangue</strong> foi realizado com sucesso.</p>
                     <p>Estamos muito felizes em ter você conosco nessa missão de <strong>salvar vidas</strong>.</p>
-
-                  
-
-                    <p>Agora você pode acessar sua conta, agendar doações e acompanhar suas contribuições.</p>
-
-                    <a class='button' href='#'>Acessar Minha Conta</a>
                 </div>
             </body>
             </html>";

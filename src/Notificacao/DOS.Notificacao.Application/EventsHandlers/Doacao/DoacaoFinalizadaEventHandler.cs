@@ -57,7 +57,7 @@ namespace DOS.Notificacao.Application.EventsHandlers.Doacao
         <body>
             <div class='container'>
                 <h2>Doação Finalizada com Sucesso!</h2>
-                <p>Olá, {evento.Nome},</p>
+                <p>Olá,</p>
                 <p>Temos o prazer de informar que sua doação passou por todas as etapas de análise e foi <strong>finalizada com sucesso</strong>.</p>
                 <p>Seu gesto generoso está agora contribuindo diretamente para salvar vidas. ❤️</p>
                 <p>Em nome de todos que serão beneficiados, agradecemos imensamente sua solidariedade!</p>
