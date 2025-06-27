@@ -295,7 +295,12 @@ Lista todos os horários disponíveis para doação.
 ### 🩸 API Doacao (porta 7141 ou Docker 5004)
 
 #### Agendar Doação (Requer Login)
-`POST /api/Doacao/agendar`  
+`POST /api/Doacao/agendar`
+```json
+{
+  "agendaId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
 - Agendamento de uma doação.
 - Um e-mail de confirmação será enviado.
 
