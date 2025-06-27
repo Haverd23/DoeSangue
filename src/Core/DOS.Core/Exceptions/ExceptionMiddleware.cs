@@ -26,16 +26,30 @@ namespace DOS.Core.Exceptions
             catch (AppException ex)
             {
                 httpContext.Response.StatusCode = ex.StatusCode;
-                httpContext.Response.ContentType = "text/plain";  
+                httpContext.Response.ContentType = "application/json";
 
-                await httpContext.Response.WriteAsync(ex.Message);
+                var response = new
+                {
+                    status = ex.StatusCode,
+                    message = ex.Message
+                };
+
+                var json = JsonSerializer.Serialize(response);
+                await httpContext.Response.WriteAsync(json);
             }
             catch (Exception ex)
             {
                 httpContext.Response.StatusCode = 500;
                 httpContext.Response.ContentType = "application/json";
-                var result = JsonSerializer.Serialize(new { message = "Erro interno no servidor", details = ex.Message });
-                await httpContext.Response.WriteAsync(result);
+
+                var response = new
+                {
+                    status = 500,
+                    message = "Erro interno no servidor"
+                };
+
+                var json = JsonSerializer.Serialize(response);
+                await httpContext.Response.WriteAsync(json);
             }
         }
     }
