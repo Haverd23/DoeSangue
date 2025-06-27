@@ -55,7 +55,7 @@ namespace DOS.Notificacao.Application.EventsHandlers.Doacao
         <body>
             <div class='container'>
                 <h2>Solicitação de Comparecimento</h2>
-                <p>Olá, {evento.Nome},</p>
+                <p>Olá,</p>
                 <p>Informamos que sua doação recente necessita de uma verificação adicional.</p>
                 <p>Por gentileza, pedimos que compareça pessoalmente à nossa unidade para tratarmos de informações importantes relacionadas à sua doação.</p>
                 <p>Estamos à disposição para qualquer esclarecimento.</p>

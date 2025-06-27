@@ -55,7 +55,7 @@ namespace DOS.Notificacao.Application.EventsHandlers.Doacao
         </head>
         <body>
             <div class='container'>
-                <h2>Obrigado por sua doação, {evento.Nome}!</h2>
+                <h2>Obrigado por sua doação!</h2>
                 <p>Parabéns! Sua doação foi concluída com sucesso no <strong>Sistema de Doação de Sangue</strong>.</p>
                 <p>Você fez a diferença na vida de quem precisa. ❤️</p>
                 <p>Nosso time agradece imensamente sua solidariedade e empenho em ajudar o próximo.</p>

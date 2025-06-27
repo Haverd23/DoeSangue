@@ -63,14 +63,13 @@ namespace DOS.Notificacao.Application.EventsHandlers.Doacao
             <body>
                 <div class='container'>
                     <h2>Doação Agendada com Sucesso!</h2>
-                    <p>Olá, {evento.Nome},</p>
+                    <p>Olá,</p>
                     <p>Você agendou uma doação de sangue para:</p>
                     <div class='info'>
                         <p><strong>Data e Hora:</strong> {dataHoraFormatada}</p>
              
                     </div>
                     <p>Obrigado por fazer a diferença! 💉❤️</p>
-                    <a class='button' href='#'>Ver detalhes no sistema</a>
                 </div>
             </body>
             </html>";
