@@ -78,7 +78,6 @@ namespace DOS.Estoque.Data.Kafka
             finally
             {
                 consumer.Close();
-                Console.WriteLine("🛑 Kafka Consumer encerrado.");
             }
         }
 
@@ -99,7 +98,6 @@ namespace DOS.Estoque.Data.Kafka
 
                         if (finalizadaEvent is null)
                         {
-                            Console.WriteLine("❌ Erro: Evento deserializado como nulo.");
                             return;
                         }
 
@@ -109,7 +107,6 @@ namespace DOS.Estoque.Data.Kafka
                         break;
 
                     default:
-                        Console.WriteLine($"Tópico desconhecido: {topic}");
                         break;
                 }
             }
