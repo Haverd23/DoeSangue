@@ -33,7 +33,7 @@ namespace DOS.Doacao.API.Controllers
             var doacaoId = await _commandDispatcher.DispatchAsync<AgendarDoacaoCommand, Guid>(command);
             return CreatedAtAction(nameof(Agendar), new { id = doacaoId }, doacaoId);
         }
-        [HttpPost("cancelar")]
+        [HttpPut("cancelar")]
         public async Task<IActionResult> Cancelar([FromBody] DoacaoCanceladaDTO request)
         {
             var command = new DoacaoCanceladaCommand(request.DoacaoId);
@@ -42,7 +42,7 @@ namespace DOS.Doacao.API.Controllers
         }
 
         [Authorize(Roles = "Administrador")]
-        [HttpPost("iniciar")]
+        [HttpPut("iniciar")]
         public async Task<IActionResult> Iniciar([FromBody] DoacaoRealizadaDTO request)
         {
             var command = new DoacaoRealizadaCommand(request.DoacaoId);
@@ -50,7 +50,7 @@ namespace DOS.Doacao.API.Controllers
             return NoContent();
         }
         [Authorize(Roles = "Administrador")]
-        [HttpPost("finalizar")]
+        [HttpPut("finalizar")]
         public async Task<IActionResult> Finalizar([FromBody] DoacaoFinalizadaDTO request)
         {
             var command = new DoacaoFinalizadaCommand(request.DoacaoId);
@@ -58,7 +58,7 @@ namespace DOS.Doacao.API.Controllers
             return NoContent();
         }
         [Authorize(Roles = "Administrador")]
-        [HttpPost("falha")]
+        [HttpPut("falha")]
         public async Task<IActionResult> Invalidar([FromBody] DoacaoFalhaDTO request)
         {
             var command = new DoacaoFalhaCommand(request.DoacaoId);
