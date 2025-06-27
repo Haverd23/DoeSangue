@@ -1,4 +1,5 @@
 ﻿using DOS.Agenda.Data;
+using DOS.Agenda.Domain;
 using DOS.Core.DomainObjects;
 using DOS.Core.Mediator.Commands;
 using DOS.Core.Message;
@@ -28,7 +29,7 @@ namespace DOS.Doacao.API.Extensions
             services.AddScoped<ICommandHandler<DoacaoFinalizadaCommand, bool>, DoacaoFinalizadaCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoFalhaCommand, bool>, DoacaoFalhaCommandHandler>();
             services.AddScoped<ICommandHandler<DoacaoCanceladaCommand, bool>, DoacaoCanceladaCommandHandler>();
-
+            services.AddScoped<IHorarioRepository, HorarioRepository>();
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
