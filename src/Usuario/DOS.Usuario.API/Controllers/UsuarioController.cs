@@ -60,6 +60,7 @@ namespace DOS.Usuario.API.Controllers
             return NoContent();
 
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPut("alterar/tiposanguineo")]
         public async Task<IActionResult> AlterarTipoSanguineo([FromBody] AlterarTipoSanguineoDTO dto)
         {
