@@ -22,7 +22,8 @@ namespace DOS.Auth.Application.Services
         public async Task<string> Autenticar(Email email, string senha)
         {
             var usuario = await _userRepository.ObterPorEmail(email);
-            if (usuario == null || !_senhaCriptografia.VerificarSenha(senha, usuario.Senha))
+            if (usuario == null) throw new AppException("Esse usuário não existe", 404);
+            if (!_senhaCriptografia.VerificarSenha(senha, usuario.Senha))
                 throw new AppException("Usuário ou senha inválidos",400);
 
             return await _tokenJWT.GerarToken(usuario);
