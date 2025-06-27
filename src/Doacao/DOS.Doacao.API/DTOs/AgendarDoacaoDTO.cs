@@ -3,6 +3,5 @@
     public class AgendarDoacaoDTO
     {
         public Guid AgendaId { get; set; }
-        public DateTime DataHoraAgendada { get; set; }
     }
 }
